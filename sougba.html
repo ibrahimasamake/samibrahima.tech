@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sougba case study — Ibrahima Samake</title>
+<meta name="description" content="How I designed, built and run Sougba: Spring Boot microservices, Angular and Flutter clients, and a Kubernetes production with GitOps.">
+<link rel="canonical" href="https://samibrahima.tech/sougba.html">
+<meta property="og:title" content="Sougba — a marketplace I built and run end to end">
+<meta property="og:url" content="https://samibrahima.tech/sougba.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="./">Ibrahima Samake</a>
+    <ul>
+      <li><a href="./#work">Work</a></li>
+      <li><a href="cv/Ibrahima-Samake-CV.pdf">CV</a></li>
+      <li><a href="./#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="wrap">
+  <header class="hero article" style="padding-left: 0; padding-right: 0; padding-bottom: 20px;">
+    <p class="eyebrow">Case study · 2025 – now</p>
+    <h1>Sougba: a marketplace I built and run, end to end</h1>
+    <p class="lead">Sougba (<a href="https://sougba.com">sougba.com</a>) connects buyers, shops and service providers in
+      Mali. Shops also get <b>Fere</b>, a workspace to manage products, stock, sales and customers. I designed the system,
+      wrote most of the code, and operate the production myself.</p>
+    <div class="actions">
+      <a class="btn primary" href="https://sougba.com">Visit sougba.com</a>
+      <a class="btn" href="cv/Ibrahima-Samake-CV.pdf">Download CV</a>
+    </div>
+  </header>
+
+  <article class="article">
+    <h2>The problem</h2>
+    <p>Most small shops in Bamako sell through WhatsApp and a paper notebook. They need two things: to be found online,
+      and a simple way to track stock and sales. Existing tools are built for other markets — expensive, English-only,
+      and heavy on mobile data. Sougba puts both in one place, in French, built for low-end phones.</p>
+
+    <h2>What I built</h2>
+    <ul>
+      <li><b>Public marketplace</b> — products, services, shops and buyer requests, with fast search and SEO-friendly pages.</li>
+      <li><b>Fere</b> — the merchant workspace: products and stock, point of sale, orders, customers, suppliers,
+        branches, and reports. It is the largest service (~33k lines).</li>
+      <li><b>Three clients on one API</b> — an Angular web app (server-side rendered), a Flutter app on Google Play,
+        and an Angular back office for the team. Every feature ships on web and mobile together.</li>
+    </ul>
+
+    <h2>Architecture</h2>
+    <div class="figure" role="img" aria-label="Sougba architecture: web and mobile clients go through Cloudflare to a Spring Cloud Gateway on Kubernetes, which routes to the services; services share Kafka, PostgreSQL, MongoDB, Redis and Typesense.">
+      <svg viewBox="0 0 760 430" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" class="d-head"/></marker></defs>
+        <!-- clients -->
+        <rect x="60" y="10" width="190" height="50" rx="10" class="d-box"/>
+        <text x="155" y="32" text-anchor="middle" class="d-t">Web app</text>
+        <text x="155" y="49" text-anchor="middle" class="d-s">Angular 21 · SSR</text>
+        <rect x="285" y="10" width="190" height="50" rx="10" class="d-box"/>
+        <text x="380" y="32" text-anchor="middle" class="d-t">Mobile app</text>
+        <text x="380" y="49" text-anchor="middle" class="d-s">Flutter · Google Play</text>
+        <rect x="510" y="10" width="190" height="50" rx="10" class="d-box"/>
+        <text x="605" y="32" text-anchor="middle" class="d-t">Back office</text>
+        <text x="605" y="49" text-anchor="middle" class="d-s">Angular · staff only</text>
+        <!-- edge -->
+        <rect x="60" y="92" width="640" height="44" rx="10" class="d-box"/>
+        <text x="380" y="113" text-anchor="middle" class="d-t">Cloudflare</text>
+        <text x="380" y="128" text-anchor="middle" class="d-s">DNS · TLS · CDN · Tunnel into the cluster (no open ports)</text>
+        <path d="M155 60V90" class="d-l" marker-end="url(#ah)"/>
+        <path d="M380 60V90" class="d-l" marker-end="url(#ah)"/>
+        <path d="M605 60V90" class="d-l" marker-end="url(#ah)"/>
+        <!-- cluster -->
+        <rect x="20" y="158" width="720" height="262" rx="14" fill="none" stroke-dasharray="6 5" class="d-l"/>
+        <text x="36" y="180" class="d-s">Kubernetes (k3s) · deployed by Argo CD</text>
+        <rect x="230" y="190" width="300" height="46" rx="10" class="d-acc"/>
+        <text x="380" y="210" text-anchor="middle" class="d-t">API gateway</text>
+        <text x="380" y="226" text-anchor="middle" class="d-s">Spring Cloud Gateway · JWT · rate limiting</text>
+        <path d="M380 136V188" class="d-l" marker-end="url(#ah)"/>
+        <!-- services -->
+        <g>
+          <rect x="40" y="266" width="160" height="50" rx="10" class="d-box"/>
+          <text x="120" y="288" text-anchor="middle" class="d-t">Auth &amp; users</text>
+          <text x="120" y="304" text-anchor="middle" class="d-s">RS256 JWT · JWKS</text>
+          <rect x="215" y="266" width="160" height="50" rx="10" class="d-box"/>
+          <text x="295" y="288" text-anchor="middle" class="d-t">Catalog &amp; requests</text>
+          <text x="295" y="304" text-anchor="middle" class="d-s">search · offers</text>
+          <rect x="390" y="266" width="160" height="50" rx="10" class="d-box"/>
+          <text x="470" y="288" text-anchor="middle" class="d-t">Fere workspace</text>
+          <text x="470" y="304" text-anchor="middle" class="d-s">POS · stock · CRM</text>
+          <rect x="565" y="266" width="160" height="50" rx="10" class="d-box"/>
+          <text x="645" y="288" text-anchor="middle" class="d-t">Real-time</text>
+          <text x="645" y="304" text-anchor="middle" class="d-s">chat · push · email</text>
+        </g>
+        <path d="M300 236 120 264" class="d-l" marker-end="url(#ah)"/>
+        <path d="M350 236 295 264" class="d-l" marker-end="url(#ah)"/>
+        <path d="M410 236 470 264" class="d-l" marker-end="url(#ah)"/>
+        <path d="M460 236 645 264" class="d-l" marker-end="url(#ah)"/>
+        <!-- data -->
+        <rect x="40" y="346" width="685" height="58" rx="10" class="d-box"/>
+        <text x="382" y="368" text-anchor="middle" class="d-t">Shared infrastructure</text>
+        <text x="382" y="388" text-anchor="middle" class="d-s">Kafka (events) · gRPC (service calls) · PostgreSQL · MongoDB · Redis · Typesense (search) · object storage</text>
+        <path d="M120 316V344" class="d-l" marker-end="url(#ah)"/>
+        <path d="M295 316V344" class="d-l" marker-end="url(#ah)"/>
+        <path d="M470 316V344" class="d-l" marker-end="url(#ah)"/>
+        <path d="M645 316V344" class="d-l" marker-end="url(#ah)"/>
+      </svg>
+    </div>
+    <p class="caption">Simplified: the backend has 10+ Spring Boot services; the four groups above carry most of the traffic.</p>
+
+    <div class="stack">
+      <b>Backend</b><span>Java 21, Spring Boot 3, Spring Cloud Gateway, Kafka, gRPC — about 97,000 lines of Java</span>
+      <b>Data</b><span>PostgreSQL (one schema per service), MongoDB, Redis, Typesense</span>
+      <b>Web &amp; mobile</b><span>Angular 21 with SSR and Tailwind; Flutter</span>
+      <b>Platform</b><span>Kubernetes (k3s), Argo CD, Jenkins, private Docker registry, Ansible, Cloudflare Tunnel, Tailscale</span>
+    </div>
+
+    <h2>How code reaches production</h2>
+    <p>Every service follows the same path, so releasing is boring — which is the goal:</p>
+    <ol>
+      <li><b>Jenkins</b> builds and tests the service, then pushes an image to a private registry.</li>
+      <li>The pipeline updates the image tag in that service's <b>deploy repo</b> (Kubernetes manifests with Kustomize).</li>
+      <li><b>Argo CD</b> sees the change and syncs the cluster. About 20 apps are managed this way, and a rollback is a git revert.</li>
+    </ol>
+
+    <h2>Running it</h2>
+    <ul>
+      <li><b>Backups:</b> PostgreSQL and MongoDB are backed up to object storage every 30 minutes with a 14-day retention;
+        product photos are mirrored every night with a 7-day trash.</li>
+      <li><b>Monitoring:</b> an automated health report checks the production every 30 minutes and flags problems before users do.</li>
+      <li><b>Resilience:</b> a standby cluster, and a real failover drill to prove it can take over (no data lost).</li>
+      <li><b>Incidents:</b> each one gets a short written post-mortem — what broke, why, and the fix that stops it from happening again.</li>
+    </ul>
+
+    <div class="callout">
+      <b>Example.</b> A scheduled clean-up job hard-deleted 211 products and their photos one night. I restored all 211
+      products from the backup taken 10 minutes earlier, recovered most photos from the CDN cache, wrote the post-mortem,
+      and added a nightly photo mirror with a 7-day trash plus a freshness check in the health report — so a photo can no
+      longer disappear without a copy.
+    </div>
+
+    <h2>What I learned</h2>
+    <ul>
+      <li><b>Fewer, bigger services win early.</b> I started with too many small services and merged several of them
+        (users into auth, notifications into real-time) — fewer moving parts, faster deploys, same features.</li>
+      <li><b>Automate the boring path.</b> One identical pipeline for every service made releases routine instead of risky.</li>
+      <li><b>Design for the real user.</b> Low-end Android phones and expensive data shaped every choice: server-side
+        rendering, small images, French first.</li>
+    </ul>
+
+    <a class="back" href="./#work">← Back to all work</a>
+  </article>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Ibrahima Samake</span>
+    <span><a href="mailto:ibsamk17@gmail.com">ibsamk17@gmail.com</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
