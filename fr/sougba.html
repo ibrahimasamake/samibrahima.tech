@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Étude de cas Sougba — Ibrahima Samake</title>
+<meta name="description" content="Comment j'ai conçu, développé et j'exploite Sougba : microservices Spring Boot, clients Angular et Flutter, production Kubernetes en GitOps.">
+<link rel="canonical" href="https://samibrahima.tech/fr/sougba.html">
+<link rel="alternate" hreflang="en" href="https://samibrahima.tech/sougba.html">
+<link rel="alternate" hreflang="fr" href="https://samibrahima.tech/fr/sougba.html">
+<meta property="og:title" content="Sougba — une marketplace que j'ai construite et que j'exploite de bout en bout">
+<meta property="og:url" content="https://samibrahima.tech/fr/sougba.html">
+<meta property="og:locale" content="fr_FR">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="./">Ibrahima Samake</a>
+    <ul>
+      <li><a href="./#work">Projets</a></li>
+      <li><a href="../cv/Ibrahima-Samake-CV-FR.pdf">CV</a></li>
+      <li><a href="./#contact">Contact</a></li>
+      <li><a href="../sougba.html" hreflang="en" lang="en">EN</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="wrap">
+  <header class="hero article" style="padding-left: 0; padding-right: 0; padding-bottom: 20px;">
+    <p class="eyebrow">Étude de cas · 2025 – aujourd'hui</p>
+    <h1>Sougba : une marketplace que j'ai construite et que j'exploite, de bout en bout</h1>
+    <p class="lead">Sougba (<a href="https://sougba.com">sougba.com</a>) met en relation acheteurs, boutiques et prestataires
+      au Mali. Les boutiques disposent aussi de <b>Fere</b>, un espace pour gérer produits, stock, ventes et clients. J'ai
+      conçu le système, écrit l'essentiel du code, et j'exploite moi-même la production.</p>
+    <div class="actions">
+      <a class="btn primary" href="https://sougba.com">Visiter sougba.com</a>
+      <a class="btn" href="../cv/Ibrahima-Samake-CV-FR.pdf">Télécharger le CV</a>
+    </div>
+  </header>
+
+  <article class="article">
+    <h2>Le problème</h2>
+    <p>La plupart des petites boutiques de Bamako vendent par WhatsApp et tiennent leurs comptes dans un cahier. Elles ont
+      besoin de deux choses : être trouvées en ligne, et suivre simplement leur stock et leurs ventes. Les outils existants
+      sont pensés pour d'autres marchés — chers, en anglais, et gourmands en données mobiles. Sougba réunit les deux, en
+      français, pour des téléphones d'entrée de gamme.</p>
+
+    <h2>Ce que j'ai construit</h2>
+    <ul>
+      <li><b>Marketplace publique</b> — produits, services, boutiques et demandes d'acheteurs, avec une recherche rapide et des pages bien référencées.</li>
+      <li><b>Fere</b> — l'espace commerçant : produits et stock, caisse, commandes, clients, fournisseurs, points de vente et
+        rapports. C'est le plus gros service (~33 000 lignes).</li>
+      <li><b>Trois clients sur une seule API</b> — une application web Angular (rendu côté serveur), une application Flutter
+        sur Google Play et un back-office Angular pour l'équipe. Chaque fonctionnalité sort sur le web et le mobile en même temps.</li>
+    </ul>
+
+    <h2>Architecture</h2>
+    <div class="figure" role="img" aria-label="Architecture de Sougba : les clients web et mobile passent par Cloudflare vers une passerelle Spring Cloud Gateway sur Kubernetes, qui route vers les services ; les services partagent Kafka, PostgreSQL, MongoDB, Redis et Typesense.">
+      <svg viewBox="0 0 760 430" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" class="d-head"/></marker></defs>
+        <!-- clients -->
+        <rect x="60" y="10" width="190" height="50" rx="10" class="d-box"/>
+        <text x="155" y="32" text-anchor="middle" class="d-t">Application web</text>
+        <text x="155" y="49" text-anchor="middle" class="d-s">Angular 21 · SSR</text>
+        <rect x="285" y="10" width="190" height="50" rx="10" class="d-box"/>
+        <text x="380" y="32" text-anchor="middle" class="d-t">Application mobile</text>
+        <text x="380" y="49" text-anchor="middle" class="d-s">Flutter · Google Play</text>
+        <rect x="510" y="10" width="190" height="50" rx="10" class="d-box"/>
+        <text x="605" y="32" text-anchor="middle" class="d-t">Back-office</text>
+        <text x="605" y="49" text-anchor="middle" class="d-s">Angular · équipe interne</text>
+        <!-- edge -->
+        <rect x="60" y="92" width="640" height="44" rx="10" class="d-box"/>
+        <text x="380" y="113" text-anchor="middle" class="d-t">Cloudflare</text>
+        <text x="380" y="128" text-anchor="middle" class="d-s">DNS · TLS · CDN · Tunnel vers le cluster (aucun port ouvert)</text>
+        <path d="M155 60V90" class="d-l" marker-end="url(#ah)"/>
+        <path d="M380 60V90" class="d-l" marker-end="url(#ah)"/>
+        <path d="M605 60V90" class="d-l" marker-end="url(#ah)"/>
+        <!-- cluster -->
+        <rect x="20" y="158" width="720" height="262" rx="14" fill="none" stroke-dasharray="6 5" class="d-l"/>
+        <text x="36" y="180" class="d-s">Kubernetes (k3s) · déployé par Argo CD</text>
+        <rect x="230" y="190" width="300" height="46" rx="10" class="d-acc"/>
+        <text x="380" y="210" text-anchor="middle" class="d-t">Passerelle API</text>
+        <text x="380" y="226" text-anchor="middle" class="d-s">Spring Cloud Gateway · JWT · limitation de débit</text>
+        <path d="M380 136V188" class="d-l" marker-end="url(#ah)"/>
+        <!-- services -->
+        <g>
+          <rect x="40" y="266" width="160" height="50" rx="10" class="d-box"/>
+          <text x="120" y="288" text-anchor="middle" class="d-t">Auth &amp; utilisateurs</text>
+          <text x="120" y="304" text-anchor="middle" class="d-s">RS256 JWT · JWKS</text>
+          <rect x="215" y="266" width="160" height="50" rx="10" class="d-box"/>
+          <text x="295" y="288" text-anchor="middle" class="d-t">Catalogue &amp; demandes</text>
+          <text x="295" y="304" text-anchor="middle" class="d-s">recherche · offres</text>
+          <rect x="390" y="266" width="160" height="50" rx="10" class="d-box"/>
+          <text x="470" y="288" text-anchor="middle" class="d-t">Espace Fere</text>
+          <text x="470" y="304" text-anchor="middle" class="d-s">POS · stock · CRM</text>
+          <rect x="565" y="266" width="160" height="50" rx="10" class="d-box"/>
+          <text x="645" y="288" text-anchor="middle" class="d-t">Temps réel</text>
+          <text x="645" y="304" text-anchor="middle" class="d-s">messagerie · push · e-mail</text>
+        </g>
+        <path d="M300 236 120 264" class="d-l" marker-end="url(#ah)"/>
+        <path d="M350 236 295 264" class="d-l" marker-end="url(#ah)"/>
+        <path d="M410 236 470 264" class="d-l" marker-end="url(#ah)"/>
+        <path d="M460 236 645 264" class="d-l" marker-end="url(#ah)"/>
+        <!-- data -->
+        <rect x="40" y="346" width="685" height="58" rx="10" class="d-box"/>
+        <text x="382" y="368" text-anchor="middle" class="d-t">Infrastructure partagée</text>
+        <text x="382" y="388" text-anchor="middle" class="d-s">Kafka (événements) · gRPC (appels) · PostgreSQL · MongoDB · Redis · Typesense (recherche) · stockage objet</text>
+        <path d="M120 316V344" class="d-l" marker-end="url(#ah)"/>
+        <path d="M295 316V344" class="d-l" marker-end="url(#ah)"/>
+        <path d="M470 316V344" class="d-l" marker-end="url(#ah)"/>
+        <path d="M645 316V344" class="d-l" marker-end="url(#ah)"/>
+      </svg>
+    </div>
+    <p class="caption">Simplifié : le backend compte plus de 10 services Spring Boot ; les quatre groupes ci-dessus portent l'essentiel du trafic.</p>
+
+    <div class="stack">
+      <b>Backend</b><span>Java 21, Spring Boot 3, Spring Cloud Gateway, Kafka, gRPC — environ 97 000 lignes de Java</span>
+      <b>Données</b><span>PostgreSQL (un schéma par service), MongoDB, Redis, Typesense</span>
+      <b>Web &amp; mobile</b><span>Angular 21 avec SSR et Tailwind ; Flutter</span>
+      <b>Plateforme</b><span>Kubernetes (k3s), Argo CD, Jenkins, registre Docker privé, Ansible, Cloudflare Tunnel, Tailscale</span>
+    </div>
+
+    <h2>Comment le code arrive en production</h2>
+    <p>Chaque service suit le même chemin, pour que livrer soit banal — c'est l'objectif :</p>
+    <ol>
+      <li><b>Jenkins</b> construit et teste le service, puis pousse une image vers un registre privé.</li>
+      <li>Le pipeline met à jour le tag de l'image dans le <b>dépôt de déploiement</b> du service (manifestes Kubernetes avec Kustomize).</li>
+      <li><b>Argo CD</b> détecte le changement et synchronise le cluster. Environ 20 applications sont gérées ainsi, et un retour arrière se fait par un simple git revert.</li>
+    </ol>
+
+    <h2>L'exploitation</h2>
+    <ul>
+      <li><b>Sauvegardes :</b> PostgreSQL et MongoDB sont sauvegardés vers un stockage objet toutes les 30 minutes (rétention
+        14 jours) ; les photos produits sont copiées chaque nuit avec une corbeille de 7 jours.</li>
+      <li><b>Supervision :</b> un rapport de santé automatique vérifie la production toutes les 30 minutes et signale les problèmes avant les utilisateurs.</li>
+      <li><b>Résilience :</b> un cluster de secours, et un vrai exercice de bascule pour prouver qu'il peut prendre le relais (aucune donnée perdue).</li>
+      <li><b>Incidents :</b> chacun donne lieu à un court post-mortem écrit — ce qui a cassé, pourquoi, et la correction qui empêche que ça recommence.</li>
+    </ul>
+
+    <div class="callout">
+      <b>Exemple.</b> Une nuit, une tâche de nettoyage planifiée a supprimé définitivement 211 produits et leurs photos. J'ai
+      restauré les 211 produits depuis la sauvegarde faite 10 minutes plus tôt, récupéré la plupart des photos depuis le
+      cache du CDN, écrit le post-mortem, puis ajouté une copie nocturne des photos avec corbeille de 7 jours et un contrôle
+      de fraîcheur dans le rapport de santé — une photo ne peut plus disparaître sans copie.
+    </div>
+
+    <h2>Ce que j'en ai appris</h2>
+    <ul>
+      <li><b>Au début, moins de services, mais plus gros.</b> J'ai commencé avec trop de petits services et j'en ai fusionné
+        plusieurs (utilisateurs dans l'authentification, notifications dans le temps réel) — moins de pièces, des déploiements plus rapides, les mêmes fonctionnalités.</li>
+      <li><b>Automatiser le chemin ennuyeux.</b> Un pipeline identique pour chaque service a rendu les livraisons routinières au lieu de risquées.</li>
+      <li><b>Concevoir pour le vrai utilisateur.</b> Les téléphones Android d'entrée de gamme et le coût des données ont guidé
+        chaque choix : rendu côté serveur, images légères, le français d'abord.</li>
+    </ul>
+
+    <a class="back" href="./#work">← Retour aux projets</a>
+  </article>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Ibrahima Samake</span>
+    <span><a href="mailto:ibsamk17@gmail.com">ibsamk17@gmail.com</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
