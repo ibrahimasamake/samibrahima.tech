@@ -130,3 +130,5 @@ footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; g
 .d-l { stroke: var(--muted); stroke-width: 1.4; fill: none; }
 .d-head { fill: var(--muted); }
 section[id] { scroll-margin-top: 56px; }
+code { font: 0.92em ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--code); border: 1px solid var(--line); border-radius: 5px; padding: 0 4px; }
+.cards:has(> .card:only-child) { grid-template-columns: minmax(0, 1fr); max-width: 560px; }

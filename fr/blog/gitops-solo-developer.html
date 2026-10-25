@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comment je livre 20 applications seul avec Jenkins et Argo CD — Ibrahima Samake</title>
+<meta name="description" content="Le pipeline GitOps d'un développeur solo : Jenkins construit l'image, un dépôt de déploiement enregistre la version, Argo CD synchronise Kubernetes. Ce qui marche, ce qui a cassé, ce que je changerais.">
+<link rel="canonical" href="https://samibrahima.tech/fr/blog/gitops-solo-developer.html">
+<link rel="alternate" hreflang="en" href="https://samibrahima.tech/blog/gitops-solo-developer.html">
+<link rel="alternate" hreflang="fr" href="https://samibrahima.tech/fr/blog/gitops-solo-developer.html">
+<meta property="og:title" content="Comment je livre 20 applications seul avec Jenkins et Argo CD">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:url" content="https://samibrahima.tech/fr/blog/gitops-solo-developer.html">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../styles.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","headline":"Comment je livre 20 applications seul avec Jenkins et Argo CD",
+ "datePublished":"2026-10-26","author":{"@type":"Person","name":"Ibrahima Samake","url":"https://samibrahima.tech/fr/"},"inLanguage":"fr"}
+</script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="../">Ibrahima Samake</a>
+    <ul>
+      <li><a href="../#work">Projets</a></li>
+      <li><a href="../#writing">Articles</a></li>
+      <li><a href="../../cv/Ibrahima-Samake-CV-FR.pdf">CV</a></li>
+      <li><a href="../../blog/gitops-solo-developer.html" hreflang="en" lang="en">EN</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="wrap">
+  <header class="hero article" style="padding-left: 0; padding-right: 0; padding-bottom: 12px;">
+    <p class="eyebrow">Article · 26 octobre 2026 · 6 min de lecture</p>
+    <h1>Comment je livre 20 applications seul avec Jenkins et Argo CD</h1>
+    <p class="lead">Je fais tourner <a href="../sougba.html">Sougba</a>, une marketplace avec plus de dix services, une
+      application web, une application mobile et un back-office — et je suis le seul ingénieur. Ce qui rend cela possible,
+      c'est un pipeline de déploiement si banal que je n'y pense presque jamais. Voici comment il fonctionne, ce qui a
+      cassé, et ce que je changerais.</p>
+  </header>
+
+  <article class="article">
+    <h2>La règle : git est la seule porte vers la production</h2>
+    <p>Personne, moi compris, ne lance <code>kubectl apply</code> à la main sur la production. Chaque changement arrive
+      dans le cluster par un commit. Cette seule règle me donne trois choses gratuitement : l'historique de chaque
+      déploiement, un point de relecture avant qu'il ait lieu, et un retour arrière qui n'est qu'un <code>git revert</code>.</p>
+
+    <h2>Le pipeline en quatre étapes</h2>
+    <ol>
+      <li><b>Pull request.</b> Un changement arrive dans le dépôt du service par une pull request. Une vérification GitHub
+        Actions lance le même build et les mêmes tests que le vrai pipeline. Si c'est rouge, ça ne fusionne pas.</li>
+      <li><b>Build.</b> Jenkins surveille la branche <code>main</code> de chaque service. À chaque nouveau commit, il
+        construit une image Docker et la pousse vers un registre privé, avec le numéro de build comme tag — jamais
+        seulement <code>latest</code>, pour que chaque version en production remonte à un build précis.</li>
+      <li><b>Enregistrement.</b> Chaque service a un second dépôt, son <b>dépôt de déploiement</b>, qui ne contient que des
+        manifestes Kubernetes (Kustomize, avec un overlay <code>prod</code>). Jenkins le clone, met à jour le tag de l'image
+        et pousse. Ce commit <i>est</i> le déploiement.</li>
+      <li><b>Synchronisation.</b> Argo CD surveille tous les dépôts de déploiement via une application parente («&nbsp;app
+        of apps&nbsp;»). Il voit le nouveau tag et met à jour le Deployment. Les sondes de disponibilité et un court
+        <code>minReadySeconds</code> garantissent qu'un pod cassé ne reçoit jamais de trafic.</li>
+    </ol>
+    <p class="muted">Environ 20 applications suivent exactement ce chemin. Ajouter un nouveau service, c'est copier un
+      Jenkinsfile, un Dockerfile et un modèle de dépôt de déploiement — une quinzaine de minutes.</p>
+
+    <h2>Pourquoi deux dépôts par service ?</h2>
+    <p>Au début, ça ressemble à du travail en plus. Ça se rembourse la première fois que quelque chose casse :</p>
+    <ul>
+      <li>Le dépôt du service répond à <i>«&nbsp;que fait le code ?&nbsp;»</i>. Le dépôt de déploiement répond à
+        <i>«&nbsp;qu'est-ce qui tourne en ce moment ?&nbsp;»</i>. Quand la production a un souci la nuit, seule la seconde
+        question compte.</li>
+      <li>Revenir en arrière ne demande jamais de reconstruire. J'annule une ligne dans le dépôt de déploiement et Argo CD
+        remet l'image précédente en moins d'une minute.</li>
+      <li>Les changements de configuration (réplicas, limites mémoire, sondes) sont aussi des déploiements, avec le même
+        historique et le même retour arrière.</li>
+    </ul>
+
+    <h2>Ce qui a cassé, et ce que j'en ai appris</h2>
+    <ul>
+      <li><b>Un pipeline qui s'arrête en silence est pire qu'un pipeline qui échoue.</b> Une fois, le démon Docker de la
+        machine qui fait tourner Jenkins était arrêté. Rien n'échouait — rien ne tournait. Les commits s'accumulaient sur
+        <code>main</code> et je les croyais en ligne. Désormais, un build en échec envoie une notification sur mon téléphone,
+        et un rapport de santé vérifie la production toutes les 30 minutes. La leçon : surveiller le pipeline lui-même, pas
+        seulement les applications qu'il déploie.</li>
+      <li><b>Les sondes ne sont pas optionnelles.</b> Avant que chaque service ait de vraies sondes de démarrage, de
+        disponibilité et de vie, un démarrage lent pouvait être déclaré sain trop tôt et perdre des requêtes pendant un
+        déploiement. Les ajouter partout a mis fin à toute une famille de bugs «&nbsp;ça marche après une minute&nbsp;».</li>
+      <li><b>Moins de services, c'est une fonctionnalité.</b> J'ai commencé avec trop de petits services. En fusionner
+        plusieurs (utilisateurs dans l'authentification, notifications dans le temps réel) a supprimé des pipelines, des
+        dépôts et des points de panne sans retirer une seule fonctionnalité.</li>
+    </ul>
+
+    <h2>Ce que je changerais ensuite</h2>
+    <ul>
+      <li><b>Une étape de pré-production.</b> Aujourd'hui, chaque fusion part directement en production. La prochaine étape :
+        un déploiement automatique sur un overlay de staging, un test rapide, puis la promotion en production par un second
+        commit.</li>
+      <li><b>Des webhooks plutôt que du polling.</b> Jenkins vérifie les nouveaux commits toutes les quelques minutes. Un
+        webhook réduirait ce délai à quelques secondes.</li>
+      <li><b>Des tests plus utiles.</b> Certains services ont encore peu de tests. Le pipeline n'est jamais plus sûr que les
+        vérifications qu'il exécute.</li>
+    </ul>
+
+    <div class="callout">
+      <b>À retenir.</b> Pour un développeur seul, le but n'est pas un pipeline astucieux. C'est un seul chemin, le même pour
+      chaque service, où chaque déploiement est un commit et chaque retour arrière un revert. C'est ce qui permet à une
+      seule personne de faire tourner vingt applications — et de dormir.
+    </div>
+
+    <p class="muted">Des questions ou des remarques ? Écrivez-moi à <a href="mailto:ibsamk17@gmail.com">ibsamk17@gmail.com</a>
+      ou sur <a href="https://www.linkedin.com/in/samibrahima">LinkedIn</a>.</p>
+
+    <a class="back" href="../#writing">← Tous les articles</a>
+  </article>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Ibrahima Samake</span>
+    <span><a href="../">samibrahima.tech/fr</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

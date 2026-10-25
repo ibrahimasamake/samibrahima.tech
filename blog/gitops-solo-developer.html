@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How I ship 20 apps alone with Jenkins and Argo CD — Ibrahima Samake</title>
+<meta name="description" content="A solo developer's GitOps pipeline: Jenkins builds the image, a deploy repo records the version, Argo CD syncs Kubernetes. What works, what broke, and what I'd change.">
+<link rel="canonical" href="https://samibrahima.tech/blog/gitops-solo-developer.html">
+<link rel="alternate" hreflang="en" href="https://samibrahima.tech/blog/gitops-solo-developer.html">
+<link rel="alternate" hreflang="fr" href="https://samibrahima.tech/fr/blog/gitops-solo-developer.html">
+<meta property="og:title" content="How I ship 20 apps alone with Jenkins and Argo CD">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://samibrahima.tech/blog/gitops-solo-developer.html">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","headline":"How I ship 20 apps alone with Jenkins and Argo CD",
+ "datePublished":"2026-10-26","author":{"@type":"Person","name":"Ibrahima Samake","url":"https://samibrahima.tech"},"inLanguage":"en"}
+</script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="../">Ibrahima Samake</a>
+    <ul>
+      <li><a href="../#work">Work</a></li>
+      <li><a href="../#writing">Writing</a></li>
+      <li><a href="../cv/Ibrahima-Samake-CV.pdf">CV</a></li>
+      <li><a href="../fr/blog/gitops-solo-developer.html" hreflang="fr" lang="fr">FR</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="wrap">
+  <header class="hero article" style="padding-left: 0; padding-right: 0; padding-bottom: 12px;">
+    <p class="eyebrow">Writing · 26 October 2026 · 6 min read</p>
+    <h1>How I ship 20 apps alone with Jenkins and Argo CD</h1>
+    <p class="lead">I run <a href="../sougba.html">Sougba</a>, a marketplace with more than ten services, a web app, a mobile
+      app and a back office — and I am the only engineer. The thing that keeps this possible is a deploy pipeline so boring
+      that I almost never think about it. Here is how it works, what broke, and what I would change.</p>
+  </header>
+
+  <article class="article">
+    <h2>The rule: git is the only way into production</h2>
+    <p>Nobody, including me, runs <code>kubectl apply</code> against production by hand. Every change reaches the cluster
+      through a commit. That one rule gives me three things for free: a history of every deploy, a review point before it
+      happens, and a rollback that is just <code>git revert</code>.</p>
+
+    <h2>The pipeline in four steps</h2>
+    <ol>
+      <li><b>Pull request.</b> A change goes to the service repo as a pull request. A GitHub Actions check runs the same
+        build and tests that the real pipeline will run. If it is red, it does not merge.</li>
+      <li><b>Build.</b> Jenkins watches the <code>main</code> branch of every service. When a new commit lands, it builds a
+        Docker image and pushes it to a private registry, tagged with the build number — never just <code>latest</code>,
+        so every running version can be traced back to a build.</li>
+      <li><b>Record.</b> Each service has a second repository, its <b>deploy repo</b>, that holds only Kubernetes manifests
+        (Kustomize, with a <code>prod</code> overlay). Jenkins clones it, bumps the image tag, and pushes. That commit
+        <i>is</i> the deploy.</li>
+      <li><b>Sync.</b> Argo CD watches all deploy repos through one parent "app of apps". It sees the new tag and rolls the
+        Deployment. Readiness probes and a short <code>minReadySeconds</code> make sure a broken pod never takes traffic.</li>
+    </ol>
+    <p class="muted">About 20 applications follow this exact path. Adding a new service means copying a Jenkinsfile, a
+      Dockerfile and a deploy repo template — about fifteen minutes of work.</p>
+
+    <h2>Why two repos per service?</h2>
+    <p>It feels like overhead at first. It pays for itself the first time something goes wrong:</p>
+    <ul>
+      <li>The service repo answers <i>"what does the code do?"</i>. The deploy repo answers <i>"what is running right now?"</i>.
+        When production misbehaves at night, I only need the second question.</li>
+      <li>Rolling back never needs a rebuild. I revert one line in the deploy repo and Argo CD puts the previous image back
+        in under a minute.</li>
+      <li>Configuration changes (replicas, memory limits, probes) are deploys too, with the same history and the same
+        rollback.</li>
+    </ul>
+
+    <h2>What broke, and what I learned</h2>
+    <ul>
+      <li><b>A pipeline that silently stops is worse than one that fails.</b> Once, the machine that runs Jenkins had its
+        Docker daemon stopped. Nothing failed — nothing ran. Commits piled up on <code>main</code> and I believed they were
+        live. Now a failed build sends a push notification to my phone, and a health report checks production every 30
+        minutes. The lesson: monitor the pipeline itself, not only the apps it deploys.</li>
+      <li><b>Probes are not optional.</b> Before every service had proper startup, readiness and liveness probes, a slow
+        start could be marked healthy too early and drop requests during a rollout. Adding them to all services ended a
+        whole class of "it worked after a minute" bugs.</li>
+      <li><b>Fewer services is a feature.</b> I started with too many small services. Merging several of them (users into
+        auth, notifications into real-time) removed pipelines, repos and failure points without removing a single feature.</li>
+    </ul>
+
+    <h2>What I would change next</h2>
+    <ul>
+      <li><b>A staging step.</b> Today every merge goes straight to production. The next step is an automatic deploy to a
+        staging overlay, a smoke test, then promotion to production by a second commit.</li>
+      <li><b>Webhooks instead of polling.</b> Jenkins checks for new commits every few minutes. A webhook would cut that
+        delay to seconds.</li>
+      <li><b>Tests that mean more.</b> Some services still have thin test suites. The pipeline is only as safe as the
+        checks it runs.</li>
+    </ul>
+
+    <div class="callout">
+      <b>The takeaway.</b> As a solo developer, the goal is not a clever pipeline. It is one path, the same for every
+      service, where every deploy is a commit and every rollback is a revert. That is what lets one person run twenty apps
+      and still sleep.
+    </div>
+
+    <p class="muted">Questions or feedback? Write to me at <a href="mailto:ibsamk17@gmail.com">ibsamk17@gmail.com</a> or
+      on <a href="https://www.linkedin.com/in/samibrahima">LinkedIn</a>.</p>
+
+    <a class="back" href="../#writing">← All writing</a>
+  </article>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Ibrahima Samake</span>
+    <span><a href="../">samibrahima.tech</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

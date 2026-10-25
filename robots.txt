@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://samibrahima.tech/sitemap.xml
