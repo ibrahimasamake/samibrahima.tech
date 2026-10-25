@@ -3,18 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>How I ship 20 apps alone with Jenkins and Argo CD — Ibrahima Samake</title>
+<title>How I deploy 10+ services alone with Jenkins and Argo CD — Ibrahima Samake</title>
 <meta name="description" content="A solo developer's GitOps pipeline: Jenkins builds the image, a deploy repo records the version, Argo CD syncs Kubernetes. What works, what broke, and what I'd change.">
 <link rel="canonical" href="https://samibrahima.tech/blog/gitops-solo-developer.html">
 <link rel="alternate" hreflang="en" href="https://samibrahima.tech/blog/gitops-solo-developer.html">
 <link rel="alternate" hreflang="fr" href="https://samibrahima.tech/fr/blog/gitops-solo-developer.html">
-<meta property="og:title" content="How I ship 20 apps alone with Jenkins and Argo CD">
+<meta property="og:title" content="How I deploy 10+ services alone with Jenkins and Argo CD">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://samibrahima.tech/blog/gitops-solo-developer.html">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../styles.css">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","headline":"How I ship 20 apps alone with Jenkins and Argo CD",
+{"@context":"https://schema.org","@type":"BlogPosting","headline":"How I deploy 10+ services alone with Jenkins and Argo CD",
  "datePublished":"2026-10-26","author":{"@type":"Person","name":"Ibrahima Samake","url":"https://samibrahima.tech"},"inLanguage":"en"}
 </script>
 </head>
@@ -35,7 +35,7 @@
 <main class="wrap">
   <header class="hero article" style="padding-left: 0; padding-right: 0; padding-bottom: 12px;">
     <p class="eyebrow">Writing · 26 October 2026 · 6 min read</p>
-    <h1>How I ship 20 apps alone with Jenkins and Argo CD</h1>
+    <h1>How I deploy 10+ services alone with Jenkins and Argo CD</h1>
     <p class="lead">I run <a href="../sougba.html">Sougba</a>, a marketplace with more than ten services, a web app, a mobile
       app and a back office — and I am the only engineer. The thing that keeps this possible is a deploy pipeline so boring
       that I almost never think about it. Here is how it works, what broke, and what I would change.</p>
@@ -60,7 +60,7 @@
       <li><b>Sync.</b> Argo CD watches all deploy repos through one parent "app of apps". It sees the new tag and rolls the
         Deployment. Readiness probes and a short <code>minReadySeconds</code> make sure a broken pod never takes traffic.</li>
     </ol>
-    <p class="muted">About 20 applications follow this exact path. Adding a new service means copying a Jenkinsfile, a
+    <p class="muted">Every service — about 20 Kubernetes deployments in total, counting shared infrastructure — follows this exact path. Adding a new service means copying a Jenkinsfile, a
       Dockerfile and a deploy repo template — about fifteen minutes of work.</p>
 
     <h2>Why two repos per service?</h2>
@@ -99,7 +99,7 @@
 
     <div class="callout">
       <b>The takeaway.</b> As a solo developer, the goal is not a clever pipeline. It is one path, the same for every
-      service, where every deploy is a commit and every rollback is a revert. That is what lets one person run twenty apps
+      service, where every deploy is a commit and every rollback is a revert. That is what lets one person run more than ten services
       and still sleep.
     </div>
 

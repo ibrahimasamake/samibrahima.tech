@@ -128,7 +128,7 @@
     <ol>
       <li><b>Jenkins</b> construit et teste le service, puis pousse une image vers un registre privé.</li>
       <li>Le pipeline met à jour le tag de l'image dans le <b>dépôt de déploiement</b> du service (manifestes Kubernetes avec Kustomize).</li>
-      <li><b>Argo CD</b> détecte le changement et synchronise le cluster. Environ 20 applications sont gérées ainsi, et un retour arrière se fait par un simple git revert.</li>
+      <li><b>Argo CD</b> détecte le changement et synchronise le cluster. Environ 20 déploiements Kubernetes (services et infrastructure partagée) sont gérés ainsi, et un retour arrière se fait par un simple git revert.</li>
     </ol>
 
     <h2>L'exploitation</h2>

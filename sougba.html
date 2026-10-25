@@ -125,7 +125,7 @@
     <ol>
       <li><b>Jenkins</b> builds and tests the service, then pushes an image to a private registry.</li>
       <li>The pipeline updates the image tag in that service's <b>deploy repo</b> (Kubernetes manifests with Kustomize).</li>
-      <li><b>Argo CD</b> sees the change and syncs the cluster. About 20 apps are managed this way, and a rollback is a git revert.</li>
+      <li><b>Argo CD</b> sees the change and syncs the cluster. About 20 Kubernetes deployments (services plus shared infrastructure) are managed this way, and a rollback is a git revert.</li>
     </ol>
 
     <h2>Running it</h2>
