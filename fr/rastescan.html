@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RasteScan : l'histoire d'un registre public des réparations de routes — Ibrahima Samake</title>
+<meta name="description" content="Les nids-de-poule ont tué 9 438 personnes en Inde en cinq ans. RasteScan transforme la photo d'un citoyen en intervention classée et en registre public, du signalement à la preuve de réparation.">
+<link rel="canonical" href="https://samibrahima.tech/fr/rastescan.html">
+<link rel="alternate" hreflang="en" href="https://samibrahima.tech/rastescan.html">
+<link rel="alternate" hreflang="fr" href="https://samibrahima.tech/fr/rastescan.html">
+<meta property="og:title" content="RasteScan : l'histoire d'un registre public des réparations de routes">
+<meta property="og:description" content="La photo d'un citoyen devient une intervention classée et un registre public, du signalement à la preuve de réparation.">
+<meta property="og:url" content="https://samibrahima.tech/fr/rastescan.html">
+<meta property="og:image" content="https://samibrahima.tech/img/og-rastescan.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="628">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../rastescan.css">
+<link rel="preload" href="../fonts/barlow-condensed-ExtraBold.woff2" as="font" type="font/woff2" crossorigin>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="./">Ibrahima Samake</a>
+    <ul>
+      <li><a href="./#work">Projets</a></li>
+      <li><a href="../cv/Ibrahima-Samake-CV-FR.pdf">CV</a></li>
+      <li><a href="./#contact">Contact</a></li>
+      <li><a href="../rastescan.html" hreflang="en" lang="en">EN</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <header class="road">
+    <div class="road-word">
+      <h1 class="paint" lang="en"><span aria-hidden="true">ANOTHER</span><span class="sr" lang="fr">Encore une victime de routes négligées : l'histoire de RasteScan</span></h1>
+    </div>
+    <div class="road-copy">
+      <p class="lead">« Another », encore une. Ce mot figurait sur la miniature d'un reportage : « Another Victim of Neglected Roads », encore
+        une victime de routes négligées. Une femme blessée par un nid-de-poule, sous un titre qui attendait déjà la suivante. RasteScan est
+        notre réponse : un registre public des dégâts sur les routes, que chacun peut lire, de la photo du citoyen à la preuve de réparation.</p>
+      <div class="actions">
+        <a class="btn primary" href="https://dev.samibrahima.tech">Ouvrir la démo en ligne</a>
+        <a class="btn" href="https://github.com/ibrahimasamake/rastescan">Lire le code</a>
+      </div>
+      <p class="where">Conçu pour le TechKubik National Level Project Expo 2026, HKBK College of Engineering, Bengaluru.</p>
+    </div>
+  </header>
+
+  <div class="lane">
+
+    <section class="stretch">
+      <div class="col">
+        <h2>L'image de départ</h2>
+        <p>La miniature a deux moitiés. À gauche, une femme est assise par terre, soutenue par des passants. À droite, le trou, plein
+          d'eau, que les scooters et les voitures contournent déjà.</p>
+        <p>Cette page ne montre que la moitié droite. Le trou, c'est la partie sur laquelle nous pouvons agir.</p>
+      </div>
+      <figure class="pic fit" style="max-width: 760px">
+        <span class="scan">
+          <img src="../img/rastescan/pothole.jpg" width="1131" height="810" alt="Un large nid-de-poule rempli d'eau boueuse, entouré de pierres cassées. Des scooters et des voitures passent derrière, sur une route mouillée.">
+          <span class="ticks" style="top: 43.2%; left: 22.1%; width: 53.9%; height: 44.5%"></span>
+        </span>
+        <figcaption class="caption">Image tirée d'un reportage vidéo ; les droits restent à l'éditeur. Le cadre est tracé à la main, dans le style de l'application. Aucune IA n'a noté cette photo.</figcaption>
+      </figure>
+    </section>
+
+    <section class="stretch">
+      <div class="col">
+        <h2>9 438 personnes en cinq ans</h2>
+        <p>« Encore une » est le mot juste. Dans une réponse écrite au Parlement, le ministère indien des Transports routiers a recensé
+          23 056 accidents liés aux nids-de-poule de 2020 à 2024. Ils ont tué 9 438 personnes et en ont blessé 19 956, dont 9 670 grièvement.</p>
+        <figure class="chart">
+          <figcaption><b>Morts dans des accidents liés aux nids-de-poule en Inde, par an</b><span>+53 % de 2020 à 2024. Survolez ou touchez une barre pour voir son chiffre.</span></figcaption>
+          <div class="plot">
+            <div class="gridline" style="--at: 0"><span>0</span></div>
+            <div class="gridline" style="--at: .4"><span>1 000</span></div>
+            <div class="gridline" style="--at: .8"><span>2 000</span></div>
+            <div class="yr-col labelled" tabindex="0" style="--v: .622" aria-label="2020 : 1 555 morts"><span class="val">1 555</span><i class="bar"></i><span class="yr">2020</span></div>
+            <div class="yr-col" tabindex="0" style="--v: .5924" aria-label="2021 : 1 481 morts"><span class="val">1 481</span><i class="bar"></i><span class="yr">2021</span></div>
+            <div class="yr-col" tabindex="0" style="--v: .7424" aria-label="2022 : 1 856 morts"><span class="val">1 856</span><i class="bar"></i><span class="yr">2022</span></div>
+            <div class="yr-col" tabindex="0" style="--v: .8644" aria-label="2023 : 2 161 morts"><span class="val">2 161</span><i class="bar"></i><span class="yr">2023</span></div>
+            <div class="yr-col labelled" tabindex="0" style="--v: .954" aria-label="2024 : 2 385 morts"><span class="val">2 385</span><i class="bar"></i><span class="yr">2024</span></div>
+          </div>
+          <details class="numbers">
+            <summary>Afficher les chiffres en tableau</summary>
+            <table>
+              <thead><tr><th scope="col">Année</th><th scope="col">Morts</th></tr></thead>
+              <tbody>
+                <tr><td>2020</td><td>1 555</td></tr><tr><td>2021</td><td>1 481</td></tr><tr><td>2022</td><td>1 856</td></tr>
+                <tr><td>2023</td><td>2 161</td></tr><tr><td>2024</td><td>2 385</td></tr><tr><td>Total</td><td>9 438</td></tr>
+              </tbody>
+            </table>
+          </details>
+        </figure>
+        <p class="caption" style="margin-bottom: 22px">Source : ministère des Transports routiers et des Autoroutes, d'après les rapports des polices des États, cités par Outlook avec PTI (voir les sources plus bas).</p>
+        <p>Ces chiffres ne comptent que ce que la police a enregistré comme lié à un nid-de-poule. L'Uttar Pradesh a déclaré 5 127 des morts.
+          L'Andhra Pradesh, le Bihar et Goa n'en ont déclaré aucun en cinq ans. Ces chiffres ne permettent pas de dire quelle part de cet écart
+          vient des routes et quelle part vient des registres, et cela fait partie du problème.</p>
+      </div>
+    </section>
+
+    <section class="stretch">
+      <div class="col">
+        <h2>Un total ne dit pas quelle route</h2>
+        <p>Les dégâts sur la route arrivent à la ville sous forme de photo WhatsApp, de post sur les réseaux sociaux ou d'appel au bureau du
+          quartier. Quelqu'un doit regarder chacun d'eux, comprendre de quoi il s'agit, juger du danger et décider qui envoyer. Une bouche
+          d'égout ouverte et une fissure fine attendent dans la même pile.</p>
+        <p>Puis les résultats reviennent sous forme de total. En août 2026, l'administration municipale de Bengaluru a déclaré à la Haute Cour
+          du Karnataka avoir repéré et réparé 10 202 nids-de-poule depuis avril, et la Cour lui a ordonné de déposer une déclaration sous serment
+          sur le dispositif utilisé. Un tel total ne dit pas si votre route en faisait partie, ni combien de temps il a fallu.</p>
+        <p>Nous avons donc donné deux missions à RasteScan : trier la pile par danger, et placer chaque étape là où chacun peut la vérifier.</p>
+      </div>
+    </section>
+
+    <section class="stretch tarmac">
+      <div class="col">
+        <h2>Un signalement, de la photo à la preuve</h2>
+        <p class="quiet">Devant un trou, il suffit d'un téléphone.</p>
+      </div>
+      <ol class="stops">
+        <li><span class="stop-n" aria-hidden="true">1</span><h3>Signaler</h3>
+          <p>Une photo et un lieu. Pas de compte. Le portail parle anglais, kannada et hindi, et sans réseau, le signalement attend dans une file hors ligne.</p></li>
+        <li><span class="stop-n" aria-hidden="true">2</span><h3>Protéger</h3>
+          <p>Les visages et les plaques d'immatriculation sont floutés avant que la photo soit stockée ou envoyée à une IA.</p></li>
+        <li><span class="stop-n" aria-hidden="true">3</span><h3>Inspecter</h3>
+          <p>L'analyse des pixels repère d'abord la chaussée et les zones abîmées, sans modèle ni réseau. Le modèle de vision reçoit ces zones comme indices. Ses cadres sont ensuite vérifiés : ceux posés sur une voiture, un bâtiment ou le ciel sont supprimés.</p></li>
+        <li><span class="stop-n" aria-hidden="true">4</span><h3>Classer</h3>
+          <p>Le serveur fixe l'urgence et le délai de réparation. Les agents travaillent sur une seule file, triée par urgence, puis délai, puis gravité, puis nombre de citoyens ayant signalé l'endroit. Chaque signalement reçoit aussi un coût de réparation indicatif.</p></li>
+        <li><span class="stop-n" aria-hidden="true">5</span><h3>Prouver</h3>
+          <p>L'équipe envoie une photo prise sur place et l'IA la vérifie. Si le dégât a disparu, la page publique affiche « Résolu » avec les photos avant et après. Sinon, le signalement est rouvert et réattribué.</p></li>
+      </ol>
+      <div class="screens fit">
+        <figure style="margin: 0"><img src="../img/rastescan/report.jpg" width="1400" height="1096" loading="lazy" alt="Page publique du signalement de démonstration RS-0126 : photo d'une route avec deux cadres de dégâts, gravité 9,6 sur 10, urgence critique, en retard de 15 heures."></figure>
+        <figure style="margin: 0"><img src="../img/rastescan/queue.jpg" width="1400" height="1007" loading="lazy" alt="File de travail des agents : tableau de signalements triés par urgence et délai, avec quartier, ancienneté, équipe et statut."></figure>
+      </div>
+      <p class="caption">Données de démonstration, écrans en anglais. À gauche : une photo du jeu de données RDD2022 avec ses annotations humaines, un lieu et une date inventés. Elle montre le format du résultat, pas une sortie du modèle. À droite : la file des agents, avec des signalements et des noms d'équipes de démonstration.</p>
+    </section>
+
+    <section class="stretch">
+      <div class="col">
+        <h2>Le modèle propose. Le serveur décide.</h2>
+        <p>Un modèle de vision sait bien décrire un trou. Nous ne le laissons pas décider de son urgence. Il renvoie une note de gravité,
+          et ces quelques lignes de Python font le reste :</p>
+<pre><code><span class="c"># backend/app/schema.py</span>
+def urgency_for(result: Detection) -> Urgency:
+    if result.hazard_type == "Open Manhole":
+        return "CRITICAL"
+    s = result.severity_score
+    if s >= 9.0:
+        return "CRITICAL"
+    if s >= 7.0:
+        return "HIGH"
+    if s >= 4.0:
+        return "MEDIUM"
+    return "LOW"</code></pre>
+        <table class="urgency">
+          <thead><tr><th scope="col">Urgence</th><th scope="col">Règle</th><th scope="col">Délai de réparation</th></tr></thead>
+          <tbody>
+            <tr><td><i class="dot" style="background: var(--u-critical)"></i>Critique</td><td>Gravité de 9 ou plus, ou toute bouche d'égout ouverte</td><td>24 heures</td></tr>
+            <tr><td><i class="dot" style="background: var(--u-high)"></i>Élevée</td><td>Gravité de 7 à 8,9</td><td>48 heures</td></tr>
+            <tr><td><i class="dot" style="background: var(--u-medium)"></i>Moyenne</td><td>Gravité de 4 à 6,9</td><td>7 jours</td></tr>
+            <tr><td><i class="dot" style="background: var(--u-low)"></i>Faible</td><td>Gravité inférieure à 4</td><td>90 jours</td></tr>
+          </tbody>
+        </table>
+        <p>La même idée traverse tout le système :</p>
+        <ul>
+          <li><b>Une bouche d'égout ouverte est toujours critique,</b> quelle que soit la note renvoyée.</li>
+          <li><b>Le doute va à un humain.</b> Sous 60 % de confiance, un signalement attend une vérification humaine avant d'être publié.</li>
+          <li><b>Les mauvaises réponses sont rejetées.</b> Chaque réponse doit respecter un schéma strict. Sinon, le serveur réessaie une fois, puis demande au citoyen de recommencer.</li>
+          <li><b>Une IA occupée ne fait rien perdre.</b> Le signalement est enregistré en attente et un processus en arrière-plan le termine plus tard. Rien de non vérifié n'est publié.</li>
+          <li><b>Le prix est de l'arithmétique.</b> Le modèle fournit les mesures ; le serveur calcule le coût. Le signalement de démonstration RS-0126 revient à 30 074 ₹ : 3,05 tonnes d'enrobé à chaud et six heures d'équipe. C'est une estimation budgétaire, pas un appel d'offres.</li>
+        </ul>
+        <h3 style="margin-top: 30px">Public par défaut, privé là où cela compte</h3>
+        <div class="ledger">
+          <div>
+            <p style="margin-bottom: 6px"><b>Visible par tous</b></p>
+            <ul>
+              <li>Chaque signalement et sa photo floutée</li>
+              <li>Gravité, urgence et délai</li>
+              <li>Quartier, équipe et historique du statut</li>
+              <li>Photos avant et après</li>
+              <li>Coût de réparation, carte et export CSV</li>
+            </ul>
+          </div>
+          <div>
+            <p style="margin-bottom: 6px"><b>Jamais montré au public</b></p>
+            <ul>
+              <li>Identifiant de l'appareil</li>
+              <li>E-mail de contact</li>
+              <li>Note privée du citoyen</li>
+              <li>E-mails des agents</li>
+            </ul>
+          </div>
+        </div>
+        <p>Des tests automatisés protègent cette limite, et chaque modification d'un signalement est inscrite dans un journal d'audit.</p>
+      </div>
+      <div class="screens fit" style="margin-top: 26px">
+        <figure style="margin: 0"><img src="../img/rastescan/map.jpg" width="1400" height="671" loading="lazy" alt="Carte publique de l'Inde avec des groupes de signalements dans de nombreuses villes."></figure>
+        <figure style="margin: 0"><img src="../img/rastescan/scoreboard.jpg" width="1400" height="1038" loading="lazy" alt="Classement des quartiers selon les réparations faites à temps, le nombre moyen de jours de réparation et les signalements en retard."></figure>
+      </div>
+      <p class="caption">La carte publique et le classement des quartiers. Données de démonstration, limites de quartiers d'exemple : ce ne sont pas de vrais chiffres municipaux.</p>
+    </section>
+
+    <section class="stretch tarmac">
+      <div class="col">
+        <h2>Trois jours dans l'historique Git</h2>
+        <p class="quiet">Le premier commit du dépôt date du 4 novembre 2026, la veille de l'ouverture de l'expo. L'après-midi du 6, il y en avait 61. Tous n'ont pas survécu.</p>
+      </div>
+      <div class="days">
+        <div class="day"><span class="day-mark" aria-hidden="true">4</span><h3>4 novembre : la forme d'ensemble</h3>
+          <p class="quiet" style="margin: 0">D'abord le design, le prompt d'inspection et le schéma de résultat. Puis le backend, le portail web, l'enveloppe Android, la CI et un déploiement Terraform et Ansible, suivis de la carte publique, du tableau de bord des agents, des statistiques, du kannada et du hindi, et des signalements hors ligne.</p></div>
+        <div class="day"><span class="day-mark" aria-hidden="true">5</span><h3>5 novembre : l'IA résiste</h3>
+          <p class="quiet" style="margin: 0">Amazon Bedrock nous était bloqué : le déploiement a appris à tourner en mode test et Groq est arrivé comme deuxième fournisseur. Le modèle Groq choisi, Llama 4 Scout, a été arrêté, alors nous en avons changé. Ollama et un détecteur YOLO sont entrés dans la nuit et repartis l'après-midi. Azure est arrivé. Puis l'analyse des pixels, avant et après le modèle, pour lui donner des indices et vérifier ses cadres.</p></div>
+        <div class="day"><span class="day-mark" aria-hidden="true">6</span><h3>6 novembre : il faut que des gens s'en servent</h3>
+          <p class="quiet" style="margin: 0">Les coûts de réparation et une page Impact. 200 signalements de démonstration à partir de vraies photos de routes. Une application Flutter pour les citoyens et les agents. Le code PIN et l'État sur chaque signalement, sur le web et dans l'application.</p></div>
+      </div>
+    </section>
+
+    <section class="stretch">
+      <div class="col">
+        <h2>Un modèle qui fonctionne, rien d'autre</h2>
+        <figure class="pic poster">
+          <img src="../img/rastescan/poster-title.jpg" width="704" height="226" loading="lazy" alt="Titre de l'affiche : TechKubik National Level Project Expo 2026, 5 et 6 novembre 2026, à partir de 9 h, ISE and CSE Seminar Hall, en présentiel.">
+        </figure>
+        <p>L'affiche de l'expo portait une ligne qui nous a plu : « Only working model will be allowed », seuls les modèles qui fonctionnent
+          sont admis. Pas de diapositives à la place du logiciel. Nous avons donc apporté le vrai système sur notre propre ordinateur : envoyer
+          une photo de route, la voir analysée, ouvrir la file des agents, attribuer le travail, le terminer, et voir la page publique, la carte
+          et le classement changer.</p>
+      </div>
+      <figure class="pic fit" style="max-width: 860px">
+        <img src="../img/rastescan/expo.jpg" width="1280" height="960" loading="lazy" alt="Cinq personnes autour d'un ordinateur portable dans une salle informatique d'université, en discussion sur le projet. Le cachet d'une application photo indique Bengaluru, Karnataka, HKBK College of Engineering, 6 novembre 2026, 11 h 19.">
+        <figcaption class="caption">Discussion autour de RasteScan au HKBK College of Engineering, à Bengaluru, le 6 novembre 2026. Le cachet de localisation vient de l'application photo du téléphone.</figcaption>
+      </figure>
+      <div class="col">
+        <p>Notre premier avis extérieur est venu d'un chauffeur d'auto-rickshaw : 40 secondes en kannada, enregistrées par nos soins, de la part d'un homme qui passe ses journées de travail sur ces routes. Une voix est un début, pas une étude.</p>
+      </div>
+    </section>
+
+    <section class="stretch">
+      <div class="col">
+        <h2>Ce que nous n'avons pas prouvé</h2>
+        <p>Un outil de sécurité routière qui se survend est pire que rien. Voici donc où il en est vraiment.</p>
+        <h3>Ce qui fonctionne aujourd'hui</h3>
+        <ul>
+          <li>Le parcours complet : signalement, IA, file, réparation, preuve publique</li>
+          <li>Le portail public en trois langues, le tableau de bord des agents et une page d'administration qui compare les modèles d'IA sur une photo</li>
+          <li>Une démo publique, une application Flutter et une version Android Capacitor</li>
+          <li>108 tests backend au vert et trois tâches de CI : backend, web et infrastructure</li>
+        </ul>
+        <h3 style="margin-top: 22px">Pas encore prouvé</h3>
+        <ul>
+          <li><b>La précision de l'IA.</b> Nous ne l'avons pas mesurée sur un jeu annoté de photos locales.</li>
+          <li><b>L'usage réel.</b> Les signalements de démonstration utilisent des photos d'un jeu de données public, avec des lieux et des dates inventés. Aucune ville ne s'en est servie.</li>
+          <li><b>La démo publique tourne en mode test.</b> Ses résultats d'IA sont des réponses types, et le site l'indique à l'écran.</li>
+          <li><b>Coûts et limites.</b> Les coûts sont indicatifs, avec des tarifs municipaux indiens approximatifs, et les limites de quartiers sont des exemples.</li>
+        </ul>
+        <h3 style="margin-top: 22px">La suite</h3>
+        <ul>
+          <li>Annoter 20 à 30 photos locales et lancer la comparaison déjà prête (<code>make evaluate</code>)</li>
+          <li>Remplacer les données de démonstration par nos propres cas à Bengaluru</li>
+          <li>Faire un pilote avec un bureau de quartier, avec ses vraies limites et ses vrais tarifs</li>
+          <li>Mesurer le délai de réparation et le nombre de signalements vérifiés</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="stretch">
+      <div class="col">
+        <h2>Comment c'est construit</h2>
+        <p>Un système volontairement simple. L'IA est une seule boîte remplaçable, et tout ce qui l'entoure est du code simple et testable.</p>
+      </div>
+      <div class="figure fit" style="max-width: 760px" role="img" aria-label="Architecture de RasteScan : le portail web et les applications Android passent par CloudFront pour joindre un serveur FastAPI sur EC2. Le serveur stocke les signalements dans SQLite et les photos floutées dans S3, et envoie les photos floutées à un fournisseur d'IA remplaçable : Bedrock, Groq ou Azure.">
+        <svg viewBox="0 0 720 340" xmlns="http://www.w3.org/2000/svg">
+          <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" class="d-head"/></marker></defs>
+          <rect x="70" y="10" width="270" height="52" rx="6" class="d-box"/>
+          <text x="205" y="32" text-anchor="middle" class="d-t">Portail web</text>
+          <text x="205" y="50" text-anchor="middle" class="d-s">React 19, Vite, TypeScript</text>
+          <rect x="380" y="10" width="270" height="52" rx="6" class="d-box"/>
+          <text x="515" y="32" text-anchor="middle" class="d-t">Android</text>
+          <text x="515" y="50" text-anchor="middle" class="d-s">Application Flutter, version Capacitor</text>
+          <rect x="70" y="92" width="580" height="40" rx="6" class="d-box"/>
+          <text x="360" y="117" text-anchor="middle" class="d-t">CloudFront (HTTPS)</text>
+          <path d="M205 62V90" class="d-l" marker-end="url(#ah)"/>
+          <path d="M515 62V90" class="d-l" marker-end="url(#ah)"/>
+          <rect x="70" y="162" width="580" height="60" rx="6" class="d-acc"/>
+          <text x="360" y="186" text-anchor="middle" class="d-t">FastAPI sur EC2</text>
+          <text x="360" y="206" text-anchor="middle" class="d-s">API publique, citoyens et agents. Règles d'urgence. Journal d'audit. Reprise en arrière-plan.</text>
+          <path d="M360 132V160" class="d-l" marker-end="url(#ah)"/>
+          <rect x="20" y="262" width="210" height="66" rx="6" class="d-box"/>
+          <text x="125" y="288" text-anchor="middle" class="d-t">SQLite</text>
+          <text x="125" y="307" text-anchor="middle" class="d-s">Signalements, historique, agents</text>
+          <rect x="255" y="262" width="210" height="66" rx="6" class="d-box"/>
+          <text x="360" y="288" text-anchor="middle" class="d-t">S3</text>
+          <text x="360" y="307" text-anchor="middle" class="d-s">Photos floutées uniquement</text>
+          <rect x="490" y="262" width="210" height="66" rx="6" class="d-box" stroke-dasharray="5 4"/>
+          <text x="595" y="288" text-anchor="middle" class="d-t">Fournisseur d'IA (remplaçable)</text>
+          <text x="595" y="307" text-anchor="middle" class="d-s">Bedrock, Groq ou Azure</text>
+          <path d="M200 222 130 260" class="d-l" marker-end="url(#ah)"/>
+          <path d="M360 222V260" class="d-l" marker-end="url(#ah)"/>
+          <path d="M520 222 590 260" class="d-l" marker-end="url(#ah)"/>
+        </svg>
+      </div>
+      <div class="col">
+        <div class="stack">
+          <b>Backend</b><span>Python, FastAPI, Pydantic, SQLite, OpenCV et Pillow</span>
+          <b>Web</b><span>React 19, Vite, TypeScript, Leaflet, GSAP ; anglais, kannada, hindi ; file hors ligne</span>
+          <b>Mobile</b><span>Flutter (citoyens et agents), plus une version Capacitor du portail</span>
+          <b>IA</b><span>Amazon Bedrock (Nova), Groq, Azure, et un mode test qui se passe d'internet</span>
+          <b>Plateforme</b><span>AWS EC2, S3 et CloudFront, Terraform, Ansible, GitHub Actions</span>
+        </div>
+
+        <h2 style="margin-top: 44px">Ce que j'en retiens</h2>
+        <ul>
+          <li><b>Mettre le modèle dans une boîte.</b> Bedrock était bloqué, un modèle Groq a été arrêté et les modèles de raisonnement d'Azure ont demandé un traitement à part, le tout en deux jours. Les règles d'urgence n'ont pas bougé, car aucune ne vivait chez un fournisseur.</li>
+          <li><b>Décider ce que l'IA ne décidera jamais.</b> Écrire « une bouche d'égout ouverte est toujours critique » dans le code a pris quelques lignes, et cela supprime toute une catégorie de pannes.</li>
+          <li><b>Étiqueter la démo.</b> Chaque signalement généré porte un badge « Demo », et le mode test l'annonce à l'écran. Un outil civique vit de la confiance : on doit voir facilement ce qui est réel.</li>
+        </ul>
+
+        <div class="back-row" style="margin-top: 26px">
+          <a class="btn primary" href="https://dev.samibrahima.tech">Ouvrir la démo en ligne</a>
+          <a class="btn" href="https://github.com/ibrahimasamake/rastescan">Lire le code</a>
+        </div>
+        <p class="quiet" style="font-size: 15px">La démo tourne depuis une machine de développement et peut parfois être hors ligne. <a href="./#contact">Contactez-moi</a> si vous souhaitez la voir fonctionner.</p>
+
+        <div class="sources">
+          <h3>Sources et crédits</h3>
+          <ul>
+            <li>Chiffres nationaux : <a href="https://www.outlookindia.com/national/pothole-deaths-in-india-rise-53-in-5-years-9438-killed-between-2020-2024">Outlook India, 14 février 2026</a>, avec PTI, sur la réponse écrite du ministre au Parlement.</li>
+            <li>Bengaluru et la Haute Cour : <a href="https://www.livelaw.in/high-court/karnataka-high-court/karnataka-high-court-pothole-crisis-bbmp-claims-potholes-545776">LiveLaw, 14 août 2026</a>.</li>
+            <li>Photo du nid-de-poule et titre : miniature d'un reportage vidéo. Les droits restent à l'éditeur. Sur cette page, la personne blessée, le logo de la chaîne et le titre imprimé sont retirés par recadrage.</li>
+            <li>Photos de routes de démonstration : RDD2022 (Arya, Maeda, Ghosh, Toshniwal et Sekimoto, <i lang="en">Geoscience Data Journal</i>, 2024), sous licence CC BY, avec les annotations du jeu de données.</li>
+            <li>Le nom du site et l'emblème dans l'application sont des exemples génériques, et non ceux d'un organisme public. Police : Barlow Condensed (SIL Open Font License).</li>
+          </ul>
+        </div>
+
+        <a class="back" href="./#work">← Retour à tous les projets</a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Ibrahima Samake</span>
+    <span><a href="mailto:ibsamk17@gmail.com">ibsamk17@gmail.com</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
