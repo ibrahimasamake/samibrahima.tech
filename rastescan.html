@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RasteScan: the story of a public road-repair record — Ibrahima Samake</title>
+<meta name="description" content="Potholes killed 9,438 people in India in five years. RasteScan turns a citizen's photo into a ranked repair job and a public record, from report to proof of repair.">
+<link rel="canonical" href="https://samibrahima.tech/rastescan.html">
+<link rel="alternate" hreflang="en" href="https://samibrahima.tech/rastescan.html">
+<link rel="alternate" hreflang="fr" href="https://samibrahima.tech/fr/rastescan.html">
+<meta property="og:title" content="RasteScan: the story of a public road-repair record">
+<meta property="og:description" content="A citizen's photo becomes a ranked repair job and a public record, from report to proof of repair.">
+<meta property="og:url" content="https://samibrahima.tech/rastescan.html">
+<meta property="og:image" content="https://samibrahima.tech/img/og-rastescan.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="628">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="rastescan.css">
+<link rel="preload" href="fonts/barlow-condensed-ExtraBold.woff2" as="font" type="font/woff2" crossorigin>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="./">Ibrahima Samake</a>
+    <ul>
+      <li><a href="./#work">Work</a></li>
+      <li><a href="cv/Ibrahima-Samake-CV.pdf">CV</a></li>
+      <li><a href="./#contact">Contact</a></li>
+      <li><a href="fr/rastescan.html" hreflang="fr" lang="fr">FR</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <header class="road">
+    <div class="road-word">
+      <h1 class="paint"><span aria-hidden="true">ANOTHER</span><span class="sr">Another victim of neglected roads: the story of RasteScan</span></h1>
+    </div>
+    <div class="road-copy">
+      <p class="lead">That word was on a news thumbnail: “Another Victim of Neglected Roads”. A woman hurt by a pothole, under a headline
+        that already expected the next one. RasteScan is what we built in reply: a public record of road damage that anyone can
+        read, from a citizen's photo to the proof of repair.</p>
+      <div class="actions">
+        <a class="btn primary" href="https://dev.samibrahima.tech">Open the live demo</a>
+        <a class="btn" href="https://github.com/ibrahimasamake/rastescan">Read the code</a>
+      </div>
+      <p class="where">Built for the TechKubik National Level Project Expo 2026, HKBK College of Engineering, Bengaluru.</p>
+    </div>
+  </header>
+
+  <div class="lane">
+
+    <section class="stretch">
+      <div class="col">
+        <h2>The picture we started from</h2>
+        <p>The thumbnail has two halves. On the left, a woman sits on the ground while people hold her up. On the right is the
+          hole, full of water, with scooters and cars already steering around it.</p>
+        <p>This page shows only the right half. The hole is the part we can do something about.</p>
+      </div>
+      <figure class="pic fit" style="max-width: 760px">
+        <span class="scan">
+          <img src="img/rastescan/pothole.jpg" width="1131" height="810" alt="A wide pothole full of muddy water with broken stones around its edge. Scooters and cars pass behind it on a wet road.">
+          <span class="ticks" style="top: 43.2%; left: 22.1%; width: 53.9%; height: 44.5%"></span>
+        </span>
+        <figcaption class="caption">Still from a news video; rights remain with the publisher. We drew the box by hand, in the style the app uses. No AI scored this photo.</figcaption>
+      </figure>
+    </section>
+
+    <section class="stretch">
+      <div class="col">
+        <h2>9,438 people in five years</h2>
+        <p>“Another” is accurate. In a written reply to Parliament, India's road transport ministry counted 23,056 pothole-related
+          accidents from 2020 to 2024. They killed 9,438 people and injured 19,956, of whom 9,670 were hurt grievously.</p>
+        <figure class="chart">
+          <figcaption><b>Deaths in pothole-related accidents in India, per year</b><span>Up 53% from 2020 to 2024. Hover over or tap a bar to see its number.</span></figcaption>
+          <div class="plot">
+            <div class="gridline" style="--at: 0"><span>0</span></div>
+            <div class="gridline" style="--at: .4"><span>1,000</span></div>
+            <div class="gridline" style="--at: .8"><span>2,000</span></div>
+            <div class="yr-col labelled" tabindex="0" style="--v: .622" aria-label="2020: 1,555 deaths"><span class="val">1,555</span><i class="bar"></i><span class="yr">2020</span></div>
+            <div class="yr-col" tabindex="0" style="--v: .5924" aria-label="2021: 1,481 deaths"><span class="val">1,481</span><i class="bar"></i><span class="yr">2021</span></div>
+            <div class="yr-col" tabindex="0" style="--v: .7424" aria-label="2022: 1,856 deaths"><span class="val">1,856</span><i class="bar"></i><span class="yr">2022</span></div>
+            <div class="yr-col" tabindex="0" style="--v: .8644" aria-label="2023: 2,161 deaths"><span class="val">2,161</span><i class="bar"></i><span class="yr">2023</span></div>
+            <div class="yr-col labelled" tabindex="0" style="--v: .954" aria-label="2024: 2,385 deaths"><span class="val">2,385</span><i class="bar"></i><span class="yr">2024</span></div>
+          </div>
+          <details class="numbers">
+            <summary>Show the numbers as a table</summary>
+            <table>
+              <thead><tr><th scope="col">Year</th><th scope="col">Deaths</th></tr></thead>
+              <tbody>
+                <tr><td>2020</td><td>1,555</td></tr><tr><td>2021</td><td>1,481</td></tr><tr><td>2022</td><td>1,856</td></tr>
+                <tr><td>2023</td><td>2,161</td></tr><tr><td>2024</td><td>2,385</td></tr><tr><td>Total</td><td>9,438</td></tr>
+              </tbody>
+            </table>
+          </details>
+        </figure>
+        <p class="caption" style="margin-bottom: 22px">Source: Ministry of Road Transport and Highways, from state police reports, as reported by Outlook with PTI (see the sources below).</p>
+        <p>These numbers only count what police recorded as pothole-related. Uttar Pradesh reported 5,127 of the deaths. Andhra
+          Pradesh, Bihar and Goa reported none at all in five years. We cannot tell from the figures how much of that gap is roads
+          and how much is record keeping, and that is part of the problem.</p>
+      </div>
+    </section>
+
+    <section class="stretch">
+      <div class="col">
+        <h2>A total cannot tell you which road</h2>
+        <p>Road damage reaches a city as a WhatsApp photo, a social media post or a call to the ward office. Someone has to look at
+          each one, work out what it is and how dangerous it is, and decide who should go. An open manhole and a hairline crack wait
+          in the same pile.</p>
+        <p>Then the results come back as a total. In August 2026, Bengaluru's civic body told the Karnataka High Court it had
+          identified and repaired 10,202 potholes since April, and the court directed it to file an affidavit on the mechanism it
+          uses. A total like that cannot tell you whether your road was one of them, or how long it took.</p>
+        <p>So we gave RasteScan two jobs: sort the pile by danger, and put every step where anyone can check it.</p>
+      </div>
+    </section>
+
+    <section class="stretch tarmac">
+      <div class="col">
+        <h2>One report, from photo to proof</h2>
+        <p class="quiet">A person standing next to a hole needs a phone and nothing else.</p>
+      </div>
+      <ol class="stops">
+        <li><span class="stop-n" aria-hidden="true">1</span><h3>Report</h3>
+          <p>A photo and a location. No login. The portal speaks English, Kannada and Hindi, and if there is no signal the report waits in an offline queue.</p></li>
+        <li><span class="stop-n" aria-hidden="true">2</span><h3>Protect</h3>
+          <p>Faces and number plates are blurred before the photo is stored or sent to any AI.</p></li>
+        <li><span class="stop-n" aria-hidden="true">3</span><h3>Inspect</h3>
+          <p>Pixel analysis finds the road surface and the damaged patches first, with no model and no network. The vision model gets those patches as hints. Its boxes are then checked: any on a car, a building or the sky are dropped.</p></li>
+        <li><span class="stop-n" aria-hidden="true">4</span><h3>Rank</h3>
+          <p>The server sets the urgency and the repair deadline. Officers work one queue, ordered by urgency, then deadline, then severity, then how many citizens reported the spot. Every report also gets an indicative repair cost.</p></li>
+        <li><span class="stop-n" aria-hidden="true">5</span><h3>Prove</h3>
+          <p>The crew uploads a photo from the site and the AI checks it. If the damage is gone, the public page shows Resolved with before and after photos. If not, the report is reopened and assigned again.</p></li>
+      </ol>
+      <div class="screens fit">
+        <figure style="margin: 0"><img src="img/rastescan/report.jpg" width="1400" height="1096" loading="lazy" alt="Public page of demo report RS-0126: a road photo with two damage boxes, severity 9.6 out of 10, rated Critical and overdue by 15 hours."></figure>
+        <figure style="margin: 0"><img src="img/rastescan/queue.jpg" width="1400" height="1007" loading="lazy" alt="Officer work queue: a table of reports sorted by urgency and deadline, with ward, age, assignee and status."></figure>
+      </div>
+      <p class="caption">Demo data. Left: a photo from the RDD2022 dataset with its human-drawn labels, and a made-up place and date. It shows the result format, not model output. Right: the officer queue with demo reports and crew names.</p>
+    </section>
+
+    <section class="stretch">
+      <div class="col">
+        <h2>The model suggests. The server decides.</h2>
+        <p>A vision model is good at describing a hole. We do not let it decide how urgent the hole is. It returns a severity score,
+          and these few lines, in plain Python, do the rest:</p>
+<pre><code><span class="c"># backend/app/schema.py</span>
+def urgency_for(result: Detection) -> Urgency:
+    if result.hazard_type == "Open Manhole":
+        return "CRITICAL"
+    s = result.severity_score
+    if s >= 9.0:
+        return "CRITICAL"
+    if s >= 7.0:
+        return "HIGH"
+    if s >= 4.0:
+        return "MEDIUM"
+    return "LOW"</code></pre>
+        <table class="urgency">
+          <thead><tr><th scope="col">Urgency</th><th scope="col">Rule</th><th scope="col">Repair deadline</th></tr></thead>
+          <tbody>
+            <tr><td><i class="dot" style="background: var(--u-critical)"></i>Critical</td><td>Severity 9 or more, or any open manhole</td><td>24 hours</td></tr>
+            <tr><td><i class="dot" style="background: var(--u-high)"></i>High</td><td>Severity 7 to 8.9</td><td>48 hours</td></tr>
+            <tr><td><i class="dot" style="background: var(--u-medium)"></i>Medium</td><td>Severity 4 to 6.9</td><td>7 days</td></tr>
+            <tr><td><i class="dot" style="background: var(--u-low)"></i>Low</td><td>Severity below 4</td><td>90 days</td></tr>
+          </tbody>
+        </table>
+        <p>The same idea runs through the rest of the system:</p>
+        <ul>
+          <li><b>An open manhole is always critical,</b> whatever score comes back.</li>
+          <li><b>Unsure goes to a person.</b> Under 60% confidence, a report waits for human review before it is published.</li>
+          <li><b>Bad answers are rejected.</b> Every answer must pass a strict schema. If it fails, the server retries once, then asks the citizen to try again.</li>
+          <li><b>A busy AI loses nothing.</b> The report is saved as waiting and a background worker finishes it later. Nothing unchecked is published.</li>
+          <li><b>The price is arithmetic.</b> The model supplies the measurements; the server works out the cost. Demo report RS-0126 comes to ₹30,074: 3.05 tonnes of hot-mix asphalt plus six crew hours. It is a budgeting estimate, not a tender.</li>
+        </ul>
+        <h3 style="margin-top: 30px">Public by default, private where it matters</h3>
+        <div class="ledger">
+          <div>
+            <p style="margin-bottom: 6px"><b>Anyone can see</b></p>
+            <ul>
+              <li>Every report and its blurred photo</li>
+              <li>Severity, urgency and deadline</li>
+              <li>Ward, assignee and status timeline</li>
+              <li>Before and after photos</li>
+              <li>Repair cost, map and CSV export</li>
+            </ul>
+          </div>
+          <div>
+            <p style="margin-bottom: 6px"><b>Never shown to the public</b></p>
+            <ul>
+              <li>Device ID</li>
+              <li>Contact email</li>
+              <li>A citizen's private note</li>
+              <li>Officer email addresses</li>
+            </ul>
+          </div>
+        </div>
+        <p>Automated tests guard that line, and every change to a report lands in an audit trail.</p>
+      </div>
+      <div class="screens fit" style="margin-top: 26px">
+        <figure style="margin: 0"><img src="img/rastescan/map.jpg" width="1400" height="671" loading="lazy" alt="Public map of India with clusters of reports across many cities."></figure>
+        <figure style="margin: 0"><img src="img/rastescan/scoreboard.jpg" width="1400" height="1038" loading="lazy" alt="Ward scoreboard table ranking areas by repairs fixed on time, average days to fix, and reports past their deadline."></figure>
+      </div>
+      <p class="caption">The public map and ward scoreboard. Demo data, with sample ward boundaries: these are not real city figures.</p>
+    </section>
+
+    <section class="stretch tarmac">
+      <div class="col">
+        <h2>Three days in the commit log</h2>
+        <p class="quiet">The repository's first commit is dated 4 November 2026, the day before the expo opened. By the afternoon of the 6th there were 61. Not all of them went forward.</p>
+      </div>
+      <div class="days">
+        <div class="day"><span class="day-mark" aria-hidden="true">4</span><h3>4 November: the whole shape</h3>
+          <p class="quiet" style="margin: 0">Design, inspection prompt and result schema came first. Then the backend, web portal, Android wrapper, CI and a Terraform and Ansible deploy, followed by the public map, officer dashboard, analytics, Kannada and Hindi, and offline reports.</p></div>
+        <div class="day"><span class="day-mark" aria-hidden="true">5</span><h3>5 November: the AI fights back</h3>
+          <p class="quiet" style="margin: 0">Amazon Bedrock was locked for us, so the deploy learned to run in test mode and Groq came in as a second provider. The Groq model we had chosen, Llama 4 Scout, was shut down, so we switched. Ollama and a YOLO detector went in overnight and were gone by the afternoon. Azure came in. Then pixel analysis, before and after the model, to give it hints and to check its boxes.</p></div>
+        <div class="day"><span class="day-mark" aria-hidden="true">6</span><h3>6 November: people have to use it</h3>
+          <p class="quiet" style="margin: 0">Repair costs and an Impact page. 200 demo reports from real road photos. A Flutter app for citizens and officers. PIN code and state on every report, on the web and in the app.</p></div>
+      </div>
+    </section>
+
+    <section class="stretch">
+      <div class="col">
+        <h2>Only a working model</h2>
+        <figure class="pic poster">
+          <img src="img/rastescan/poster-title.jpg" width="704" height="226" loading="lazy" alt="Event poster title: TechKubik National Level Project Expo 2026, 5th and 6th November 2026, 9:00 AM onwards, ISE and CSE Seminar Hall, offline mode.">
+        </figure>
+        <p>The expo poster had a line we liked: “Only working model will be allowed”. No slides standing in for software. So we
+          brought the real thing on our own laptop: send a road photo, watch it get analysed, open the officer queue, assign the
+          job, fix it, and see the public page, map and scoreboard change.</p>
+      </div>
+      <figure class="pic fit" style="max-width: 860px">
+        <img src="img/rastescan/expo.jpg" width="1280" height="960" loading="lazy" alt="Five people around a laptop in a college computer lab, in conversation about the project. A camera app's stamp reads Bengaluru, Karnataka, HKBK College of Engineering, 6 November 2026, 11:19 AM.">
+        <figcaption class="caption">Talking through RasteScan at HKBK College of Engineering, Bengaluru, on 6 November 2026. The location stamp comes from the phone's camera app.</figcaption>
+      </figure>
+      <div class="col">
+        <p>Our first review from outside the team came from an auto driver: 40 seconds in Kannada, recorded by us, from someone who spends his working day on these roads. One voice is a start, not a study.</p>
+      </div>
+    </section>
+
+    <section class="stretch">
+      <div class="col">
+        <h2>What we have not proved</h2>
+        <p>A road-safety tool that oversells itself is worse than none, so here is where it really stands.</p>
+        <h3>Working today</h3>
+        <ul>
+          <li>The full flow: report, AI, queue, repair, public proof</li>
+          <li>The public portal in three languages, the officer dashboard, and an admin page that compares AI models on one photo</li>
+          <li>A public demo, a Flutter app and a Capacitor Android build</li>
+          <li>108 backend tests passing, and three CI jobs for backend, web and infrastructure</li>
+        </ul>
+        <h3 style="margin-top: 22px">Not proved yet</h3>
+        <ul>
+          <li><b>AI accuracy.</b> We have not measured it on a labelled set of local photos.</li>
+          <li><b>Real use.</b> The demo reports use public dataset photos with made-up places and dates. No city has used this.</li>
+          <li><b>The public demo runs in test mode.</b> Its AI results are sample answers, and the site says so on screen.</li>
+          <li><b>Costs and boundaries.</b> Costs are indicative, using rough Indian municipal rates, and the ward boundaries are samples.</li>
+        </ul>
+        <h3 style="margin-top: 22px">Next</h3>
+        <ul>
+          <li>Label 20 to 30 local photos and run the comparison we already built (<code>make evaluate</code>)</li>
+          <li>Replace the demo data with our own Bengaluru cases</li>
+          <li>Pilot with one ward office, using its real boundaries and rates</li>
+          <li>Measure time to fix and how many reports are verified</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="stretch">
+      <div class="col">
+        <h2>How it is built</h2>
+        <p>A deliberately simple system. The AI is one replaceable box, and everything around it is plain, testable code.</p>
+      </div>
+      <div class="figure fit" style="max-width: 760px" role="img" aria-label="RasteScan architecture: the web portal and Android apps reach a FastAPI server on EC2 through CloudFront. The server stores reports in SQLite and blurred photos in S3, and sends blurred photos to a replaceable AI provider: Bedrock, Groq or Azure.">
+        <svg viewBox="0 0 720 340" xmlns="http://www.w3.org/2000/svg">
+          <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" class="d-head"/></marker></defs>
+          <rect x="70" y="10" width="270" height="52" rx="6" class="d-box"/>
+          <text x="205" y="32" text-anchor="middle" class="d-t">Web portal</text>
+          <text x="205" y="50" text-anchor="middle" class="d-s">React 19, Vite, TypeScript</text>
+          <rect x="380" y="10" width="270" height="52" rx="6" class="d-box"/>
+          <text x="515" y="32" text-anchor="middle" class="d-t">Android</text>
+          <text x="515" y="50" text-anchor="middle" class="d-s">Flutter app, Capacitor build</text>
+          <rect x="70" y="92" width="580" height="40" rx="6" class="d-box"/>
+          <text x="360" y="117" text-anchor="middle" class="d-t">CloudFront (HTTPS)</text>
+          <path d="M205 62V90" class="d-l" marker-end="url(#ah)"/>
+          <path d="M515 62V90" class="d-l" marker-end="url(#ah)"/>
+          <rect x="70" y="162" width="580" height="60" rx="6" class="d-acc"/>
+          <text x="360" y="186" text-anchor="middle" class="d-t">FastAPI on EC2</text>
+          <text x="360" y="206" text-anchor="middle" class="d-s">Public, citizen and officer APIs. Urgency rules. Audit trail. Retry worker.</text>
+          <path d="M360 132V160" class="d-l" marker-end="url(#ah)"/>
+          <rect x="20" y="262" width="210" height="66" rx="6" class="d-box"/>
+          <text x="125" y="288" text-anchor="middle" class="d-t">SQLite</text>
+          <text x="125" y="307" text-anchor="middle" class="d-s">Reports, history, officers, wards</text>
+          <rect x="255" y="262" width="210" height="66" rx="6" class="d-box"/>
+          <text x="360" y="288" text-anchor="middle" class="d-t">S3</text>
+          <text x="360" y="307" text-anchor="middle" class="d-s">Blurred photos only</text>
+          <rect x="490" y="262" width="210" height="66" rx="6" class="d-box" stroke-dasharray="5 4"/>
+          <text x="595" y="288" text-anchor="middle" class="d-t">AI provider (replaceable)</text>
+          <text x="595" y="307" text-anchor="middle" class="d-s">Bedrock, Groq or Azure</text>
+          <path d="M200 222 130 260" class="d-l" marker-end="url(#ah)"/>
+          <path d="M360 222V260" class="d-l" marker-end="url(#ah)"/>
+          <path d="M520 222 590 260" class="d-l" marker-end="url(#ah)"/>
+        </svg>
+      </div>
+      <div class="col">
+        <div class="stack">
+          <b>Backend</b><span>Python, FastAPI, Pydantic, SQLite, OpenCV and Pillow</span>
+          <b>Web</b><span>React 19, Vite, TypeScript, Leaflet, GSAP; English, Kannada, Hindi; offline queue</span>
+          <b>Mobile</b><span>Flutter (citizen and officer), plus a Capacitor build of the portal</span>
+          <b>AI</b><span>Amazon Bedrock (Nova), Groq, Azure, and a test mode that needs no internet</span>
+          <b>Platform</b><span>AWS EC2, S3 and CloudFront, Terraform, Ansible, GitHub Actions</span>
+        </div>
+
+        <h2 style="margin-top: 44px">What I took from it</h2>
+        <ul>
+          <li><b>Put the model in a box.</b> Bedrock was locked, a Groq model was shut down, and Azure's reasoning models needed their own handling, all inside two days. The urgency rules stayed put, because none of them lived inside a provider.</li>
+          <li><b>Decide what the AI may never decide.</b> Writing “an open manhole is always critical” in code took a few lines, and it removes a whole class of failure.</li>
+          <li><b>Label the demo.</b> Every seeded report carries a Demo badge, and test mode says so on screen. A civic tool lives on trust, so it should be easy to see what is real.</li>
+        </ul>
+
+        <div class="back-row" style="margin-top: 26px">
+          <a class="btn primary" href="https://dev.samibrahima.tech">Open the live demo</a>
+          <a class="btn" href="https://github.com/ibrahimasamake/rastescan">Read the code</a>
+        </div>
+        <p class="quiet" style="font-size: 15px">The demo runs from a development machine, so it may sometimes be offline. <a href="./#contact">Contact me</a> if you would like to see it running.</p>
+
+        <div class="sources">
+          <h3>Sources and credits</h3>
+          <ul>
+            <li>National figures: <a href="https://www.outlookindia.com/national/pothole-deaths-in-india-rise-53-in-5-years-9438-killed-between-2020-2024">Outlook India, 14 February 2026</a>, with PTI, reporting the minister's written reply to Parliament.</li>
+            <li>Bengaluru and the High Court: <a href="https://www.livelaw.in/high-court/karnataka-high-court/karnataka-high-court-pothole-crisis-bbmp-claims-potholes-545776">LiveLaw, 14 August 2026</a>.</li>
+            <li>Pothole photo and headline: a news video thumbnail. Rights remain with the publisher. On this page, the injured person, the channel logo and the printed headline are cropped out.</li>
+            <li>Demo road photos: RDD2022 (Arya, Maeda, Ghosh, Toshniwal and Sekimoto, <i>Geoscience Data Journal</i>, 2024), used under CC BY, with labels from the dataset.</li>
+            <li>The site name and emblem in the app are generic placeholders, not those of any government body. Type: Barlow Condensed (SIL Open Font License).</li>
+          </ul>
+        </div>
+
+        <a class="back" href="./#work">← Back to all work</a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Ibrahima Samake</span>
+    <span><a href="mailto:ibsamk17@gmail.com">ibsamk17@gmail.com</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

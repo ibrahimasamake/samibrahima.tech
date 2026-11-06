@@ -1,0 +1,143 @@
+/* RasteScan story page. Sits on top of styles.css; nothing here touches the rest of the site.
+   The look comes from the app: asphalt, lane paint, Barlow Condensed, AI corner ticks. */
+@font-face { font-family: "Barlow Condensed"; src: url("fonts/barlow-condensed-ExtraBold.woff2") format("woff2"); font-weight: 800; font-display: swap; }
+@font-face { font-family: "Barlow Condensed"; src: url("fonts/barlow-condensed-SemiBold.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+
+:root {
+  --asphalt: #24262a;
+  --paint: #ffc400;
+  --chalk: #f8f7f3;
+  --chalk-dim: #c3c5c8;
+  --bar: #b57f00;
+  --u-critical: #ff4b3e;
+  --u-high: #ff8a1f;
+  --u-medium: #ffc400;
+  --u-low: #4da3ff;
+  --display: "Barlow Condensed", "Arial Narrow", -apple-system, "Segoe UI", sans-serif;
+  /* Lane line position: it lines up with the left edge of the site's .wrap. */
+  --lane-x: max(20px, calc((100vw - 980px) / 2 + 20px));
+  --indent: 44px;
+  /* Aggregate in the road surface. */
+  --grit: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.15' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1.5 -.62'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='.26'/%3E%3C/svg%3E");
+  /* Worn paint: holes in the mask let the road show through the letters. */
+  --wear: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='520' height='520'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.32' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -11 8.55'/%3E%3C/filter%3E%3Crect width='520' height='520' filter='url(%23w)'/%3E%3C/svg%3E");
+}
+@media (prefers-color-scheme: dark) { :root { --bar: #b88806; } }
+@media (max-width: 640px) { :root { --lane-x: 16px; --indent: 30px; } }
+
+/* The road: hero */
+.road { position: relative; overflow: hidden; background: var(--grit), var(--asphalt); color: var(--chalk); }
+.road-word { padding-top: clamp(30px, 6vw, 72px); }
+.paint { margin: 0; font: 800 min(27vw, 350px)/.86 var(--display); letter-spacing: -.004em; text-align: center; color: var(--paint);
+  transform: perspective(1500px) rotateX(38deg) scaleY(1.28); transform-origin: 50% 100%; white-space: nowrap;
+  -webkit-mask-image: var(--wear); mask-image: var(--wear); }
+.road-copy { position: relative; padding: clamp(26px, 4vw, 44px) 20px clamp(44px, 6vw, 72px) calc(var(--lane-x) + var(--indent)); max-width: calc(var(--lane-x) + var(--indent) + 42rem); }
+.road-copy .lead { font-size: clamp(19px, 2.3vw, 23px); line-height: 1.45; margin: 0 0 22px; color: var(--chalk); }
+.road-copy .where { color: var(--chalk-dim); font-size: 15px; margin: 18px 0 0; }
+.road .btn { background: transparent; border-color: rgba(248, 247, 243, .4); color: var(--chalk); }
+.road .btn:hover { border-color: var(--chalk); }
+.road .btn.primary { background: var(--paint); border-color: var(--paint); color: #14161a; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* The one moment of motion: a line-painting machine lays the word down, once. */
+@media (prefers-reduced-motion: no-preference) {
+  .paint span[aria-hidden] { display: inline-block; animation: lay-paint 1.05s cubic-bezier(.3, .05, .2, 1) .15s both; }
+  @keyframes lay-paint { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+}
+
+/* The lane line: the spine of the whole page, from hero to the end */
+.lane { position: relative; }
+.lane::before, .road-copy::before { content: ""; position: absolute; top: 0; bottom: 0; left: var(--lane-x); width: 6px; z-index: 1; pointer-events: none;
+  background: repeating-linear-gradient(to bottom, var(--paint) 0 46px, transparent 46px 86px); }
+.road-copy::before { left: var(--lane-x); }
+
+/* Sections */
+.stretch { position: relative; padding: clamp(40px, 5.5vw, 62px) 20px clamp(40px, 5.5vw, 62px) calc(var(--lane-x) + var(--indent)); border-top: 0; }
+.stretch > * { position: relative; z-index: 2; }
+.col { max-width: 42rem; }
+.fit { max-width: min(calc(980px - var(--indent) - 40px), 100%); }
+.lane { font-size: 17px; }
+.lane h2 { font: 800 clamp(36px, 6vw, 58px)/1.02 var(--display); letter-spacing: -.005em; margin: 0 0 18px; max-width: 18em; }
+.lane h3 { font: 600 clamp(23px, 3vw, 27px)/1.15 var(--display); margin: 0 0 6px; letter-spacing: 0; }
+.lane p { margin: 0 0 16px; }
+.lane .col ul { padding-left: 20px; margin: 0 0 16px; }
+.lane .col li { margin: 6px 0; }
+.quiet { color: var(--muted); }
+.caption { font-size: 14px; color: var(--muted); margin: 10px 0 0; max-width: 42rem; }
+.pic { margin: 22px 0 26px; }
+.pic img { display: block; width: 100%; border-radius: 4px; border: 1px solid var(--line); }
+
+/* AI corner ticks, as the app draws them */
+.scan { position: relative; display: block; line-height: 0; }
+.scan img { border-radius: 4px; border: 0; }
+.ticks { position: absolute; --t: 28px; --c: var(--paint);
+  background:
+    linear-gradient(var(--c), var(--c)) 0 0 / var(--t) 3px, linear-gradient(var(--c), var(--c)) 0 0 / 3px var(--t),
+    linear-gradient(var(--c), var(--c)) 100% 0 / var(--t) 3px, linear-gradient(var(--c), var(--c)) 100% 0 / 3px var(--t),
+    linear-gradient(var(--c), var(--c)) 0 100% / var(--t) 3px, linear-gradient(var(--c), var(--c)) 0 100% / 3px var(--t),
+    linear-gradient(var(--c), var(--c)) 100% 100% / var(--t) 3px, linear-gradient(var(--c), var(--c)) 100% 100% / 3px var(--t);
+  background-repeat: no-repeat; }
+
+/* Chart */
+.chart { margin: 26px 0 8px; }
+.chart figcaption b { display: block; font-weight: 600; }
+.chart figcaption span { color: var(--muted); font-size: 14px; }
+.plot { position: relative; height: 270px; margin-top: 18px; display: grid; grid-template-columns: repeat(5, 1fr); padding-left: 44px; }
+.gridline { position: absolute; left: 0; right: 0; bottom: calc(26px + (100% - 26px) * var(--at)); height: 1px; background: var(--line); }
+.gridline span { position: absolute; left: 0; bottom: 3px; font-size: 12.5px; color: var(--muted); }
+.yr-col { position: relative; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; cursor: default; outline-offset: 2px; border-radius: 4px; }
+.yr-col .bar { display: block; width: 24px; height: calc((100% - 26px) * var(--v)); background: var(--bar); border-radius: 4px 4px 0 0; }
+.yr-col .val { font-size: 14px; font-weight: 600; margin-bottom: 4px; opacity: 0; }
+.yr-col.labelled .val, .yr-col:hover .val, .yr-col:focus .val { opacity: 1; }
+.yr-col .yr { flex: 0 0 26px; line-height: 26px; font-size: 13px; color: var(--muted); }
+.numbers { margin: 12px 0 0; font-size: 14.5px; }
+.numbers summary { cursor: pointer; color: var(--accent); }
+.numbers table { margin-top: 8px; border-collapse: collapse; }
+.numbers th, .numbers td { padding: 3px 18px 3px 0; text-align: left; border-bottom: 1px solid var(--line); font-weight: 400; }
+
+/* Asphalt stretches of the road */
+.tarmac { background: var(--grit), var(--asphalt); color: var(--chalk); }
+.tarmac .quiet, .tarmac .caption { color: var(--chalk-dim); }
+.tarmac a { color: var(--paint); }
+
+/* Stops on the lane: a true sequence, so they are numbered */
+.stops { list-style: none; margin: 30px 0 34px; padding: 0; max-width: 42rem; }
+.stops li { position: relative; padding: 0 0 26px; }
+.stops li:last-child { padding-bottom: 0; }
+.stop-n { position: absolute; left: calc(var(--indent) * -1 - 11px); top: 0; width: 28px; height: 28px; border-radius: 50%; background: var(--paint); color: #14161a;
+  font: 800 18px/28px var(--display); text-align: center; }
+.stops p { margin: 0; color: var(--chalk-dim); }
+.tarmac .stops h3 { color: var(--chalk); }
+.screens { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 3fr); gap: 14px; margin: 0; }
+.screens img { display: block; width: 100%; border-radius: 4px; }
+@media (max-width: 720px) { .screens { grid-template-columns: minmax(0, 1fr); } }
+
+/* Code and urgency table */
+.lane pre { background: var(--code); border: 1px solid var(--line); border-radius: 4px; padding: 16px 18px; overflow-x: auto; font: 14px/1.55 ui-monospace, SFMono-Regular, Menlo, monospace; margin: 18px 0 8px; }
+.lane pre .c { color: var(--muted); }
+.urgency { width: 100%; border-collapse: collapse; margin: 22px 0 22px; font-size: 16px; }
+.urgency th { text-align: left; font-weight: 600; font-size: 14px; color: var(--muted); padding: 0 16px 8px 0; }
+.urgency td { padding: 10px 16px 10px 0; border-top: 1px solid var(--line); vertical-align: top; }
+.urgency td:first-child { white-space: nowrap; font-weight: 600; }
+.dot { display: inline-block; width: 11px; height: 11px; border-radius: 50%; margin-right: 8px; }
+.ledger { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 34px; margin: 22px 0; max-width: 42rem; }
+.ledger ul { margin: 0; padding-left: 20px; }
+@media (max-width: 560px) { .ledger { grid-template-columns: 1fr; } }
+
+/* Dates on the lane */
+.days { margin: 26px 0 0; max-width: 42rem; }
+.day { position: relative; padding-bottom: 26px; }
+.day:last-child { padding-bottom: 0; }
+.day-mark { position: absolute; left: calc(var(--indent) * -1 - 11px); top: 2px; width: 28px; height: 28px; border-radius: 4px; background: var(--paint); color: #14161a;
+  font: 800 18px/28px var(--display); text-align: center; }
+.day ul { margin: 6px 0 0 !important; }
+
+.poster { max-width: 460px; }
+.poster img { border: 0; border-radius: 4px; }
+
+.back-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 8px 0 26px; }
+.sources { font-size: 14.5px; color: var(--muted); max-width: 42rem; }
+.sources h3 { color: var(--text); font-size: 22px; margin-top: 24px; }
+.sources ul { padding-left: 18px; }
+.sources li { margin: 7px 0 !important; overflow-wrap: anywhere; }
+.lane .figure { margin-top: 18px; }
