@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Étude de cas Sougba — Ibrahima Samake</title>
-<meta name="description" content="Comment j'ai conçu, développé et j'exploite Sougba : microservices Spring Boot, clients Angular et Flutter, production Kubernetes en GitOps.">
+<meta name="description" content="Pourquoi les boutiques de Bamako avaient besoin de Sougba, ce qu'il change pour elles, et comment je l'ai construit et le fais tourner.">
 <link rel="canonical" href="https://samibrahima.tech/fr/sougba.html">
 <link rel="alternate" hreflang="en" href="https://samibrahima.tech/sougba.html">
 <link rel="alternate" hreflang="fr" href="https://samibrahima.tech/fr/sougba.html">
@@ -56,7 +56,7 @@
     <ul>
       <li><b>Marketplace publique</b> — produits, services, boutiques et demandes d'acheteurs, avec une recherche rapide et des pages bien référencées.</li>
       <li><b>Fere</b> — l'espace commerçant : produits et stock, caisse, commandes, clients, fournisseurs, points de vente et
-        rapports. C'est le plus gros service (~33 000 lignes).</li>
+        rapports.</li>
       <li><b>Trois clients sur une seule API</b> — une application web Angular (rendu côté serveur), une application Flutter
         sur Google Play et un back-office Angular pour l'équipe. Chaque fonctionnalité sort sur le web et le mobile en même temps.</li>
     </ul>
@@ -121,7 +121,7 @@
     <p class="caption">Simplifié : le backend compte plus de 10 services Spring Boot ; les quatre groupes ci-dessus portent l'essentiel du trafic.</p>
 
     <div class="stack">
-      <b>Backend</b><span>Java 21, Spring Boot 3, Spring Cloud Gateway, Kafka, gRPC — environ 97 000 lignes de Java</span>
+      <b>Backend</b><span>Java 21, Spring Boot 3, Spring Cloud Gateway, Kafka, gRPC</span>
       <b>Données</b><span>PostgreSQL (un schéma par service), MongoDB, Redis, Typesense</span>
       <b>Web &amp; mobile</b><span>Angular 21 avec SSR et Tailwind ; Flutter</span>
       <b>Plateforme</b><span>Kubernetes (k3s), Argo CD, Jenkins, registre Docker privé, Ansible, Cloudflare Tunnel, Tailscale</span>
