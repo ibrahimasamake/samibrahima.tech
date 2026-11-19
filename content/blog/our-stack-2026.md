@@ -13,7 +13,7 @@ Here is the current toolbox, and the honest reason behind each pick.
 ## Web
 
 - **Next.js** for marketing sites, online shops and content-heavy apps. Fast pages, good SEO, easy to host. (This site and the [Nafas Perfumes shop](/projects/nafas-perfumes/) are built with it.)
-- **Angular with server-side rendering** for big, long-lived web apps with lots of forms and screens, like [Sougba](/projects/sougba/) and its back office. Structure pays off when a codebase grows.
+- **Angular with server-side rendering** for big, long-lived web apps with lots of forms and screens. Structure pays off when a codebase grows.
 - **Tailwind CSS** because consistent design is easier when the design system lives in the code.
 
 ## Mobile
@@ -30,13 +30,12 @@ Here is the current toolbox, and the honest reason behind each pick.
 
 - **PostgreSQL** by default. It does almost everything well.
 - **Redis** for caching and short-lived data.
-- **Typesense** for fast, typo-tolerant search that shoppers actually enjoy.
 
 ## Running it
 
-- **Docker and Kubernetes (k3s)** with **Argo CD**: every deploy is a commit. ([How that works](/blog/gitops-solo-developer/).)
+- **Docker and Kubernetes** with **Argo CD**: every deploy is a commit, every rollback is a revert.
 - **Jenkins and GitHub Actions** for builds and checks.
-- **Cloudflare** in front: DNS, TLS, CDN, and Tunnel so servers need no open ports.
+- **Cloudflare** in front: DNS, TLS and a CDN.
 - **Terraform and Ansible** so infrastructure is written down, not remembered.
 
 ## And what we don't use by default

@@ -26,9 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Kept from the previous site
     { path: "/rastescan.html", priority: 0.5 },
     { path: "/fr/", priority: 0.4 },
-    { path: "/fr/sougba.html", priority: 0.3 },
     { path: "/fr/rastescan.html", priority: 0.3 },
-    { path: "/fr/blog/gitops-solo-developer.html", priority: 0.3 },
   ];
   return entries.map((e) => ({
     url: `${siteConfig.url}${e.path}`,

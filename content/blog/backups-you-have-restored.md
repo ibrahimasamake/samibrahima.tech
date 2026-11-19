@@ -1,41 +1,43 @@
 ---
 title: "A backup you have never restored is just a hope"
-description: "The morning a clean-up job deleted products it should have kept, and the three small changes that made sure it can never happen silently again."
+description: "Most teams say they have backups. Far fewer have ever brought one back. A short, practical guide to backups that actually save you."
 date: 2026-11-19
 category: Cloud & DevOps
-tags: [backups, incident, postgres, mongodb, reliability]
+tags: [backups, reliability, devops]
 ---
 
 Every team says "we have backups". Fewer can say "we restored one last month".
 
-Sougba learned the difference the honest way.
+The difference only shows up on the worst morning of the year.
 
-## What happened
+## How backups fail quietly
 
-A scheduled clean-up job ran as usual one night. It was supposed to remove expired data. It also removed products it should have kept.
+Backups rarely fail with a loud error. They fail in silence:
 
-No alarms. No errors. The job did exactly what its code said. It just said the wrong thing.
+- the backup job stopped weeks ago and nobody noticed,
+- the database is backed up, but the photos and documents are not,
+- the backup exists, but nobody knows the steps to bring it back,
+- a script deletes the wrong data, and the next backup happily saves the damage.
 
-## The same morning
+None of these look like a problem until you need the backup.
 
-The products were restored from the latest database backup. Shops kept selling. Then came the part that matters more than the fix: a short written post-mortem. What broke, why, and what stops it from happening again.
+## Four habits that fix most of it
 
-## Three changes, all small
+1. **Back up often, keep it long.** Short gaps between backups mean less lost work. Keeping them for a couple of weeks means you can go back to *before* a mistake you only noticed days later.
+2. **Back up the files too.** Photos, invoices and uploads are not in the database. Give them their own copy, ideally with a "trash" period so a deletion can be undone.
+3. **Check freshness automatically.** A small scheduled check that asks *"is the latest backup actually recent?"* turns a silent failure into a loud one.
+4. **Write it down after every incident.** What broke, why, and what stops it from happening again. Short, honest, no blame.
 
-1. **Databases backed up every 30 minutes,** PostgreSQL and MongoDB, to object storage, with 14 days of retention. Short gaps, long memory.
-2. **A nightly mirror of product photos with a 7-day trash.** Photos are files, not rows, so they needed their own safety net. Anything deleted can come back for a week.
-3. **A freshness check in the health report.** Every 30 minutes, an automated report checks production, including *"is the latest backup actually recent?"*. A backup job that quietly stops is now loud.
+## And one habit that matters more than all of them: practise
 
-## And one big one: practise
-
-A standby cluster exists, and it has been through a real failover drill, with no data lost. The drill is the only way to know the plan works before you need it.
+Restore a backup on purpose, on a quiet day, into a separate environment. Time it. Write down the steps. That drill is the only way to know the plan works before you need it.
 
 ## Your quick checklist
 
 - When did you last **restore** a backup, not just take one?
 - Would you notice if the backup job stopped tonight?
 - Are files (photos, documents) backed up, or only the database?
-- Does someone write down what happened after an incident?
+- Is there a written restore procedure someone else could follow?
 
 If two of those made you a little nervous, you are not alone. It is fixable in days, not months.
 

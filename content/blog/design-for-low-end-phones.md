@@ -15,7 +15,7 @@ So every decision started with that phone.
 
 ## Render on the server
 
-A page that needs a big JavaScript bundle before it shows anything feels broken on a slow phone. Sougba's web app is server-side rendered (Angular SSR): the first thing that arrives is a real page with real products, not a spinner.
+A page that needs a big JavaScript bundle before it shows anything feels broken on a slow phone. Sougba's pages arrive ready: the first thing you see is real products, not a spinner.
 
 Bonus: search engines see the same real page. Good for the shops, good for discovery.
 

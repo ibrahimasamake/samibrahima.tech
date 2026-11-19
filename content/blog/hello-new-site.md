@@ -19,6 +19,6 @@ The old site was a CV with a few stories. This one is built for the people we ac
 
 ## What to expect here
 
-Short, practical posts. No buzzword soup. Stories from real products: the pipeline that deploys Sougba, the morning a clean-up job deleted the wrong data, why the AI in RasteScan is never allowed to decide alone.
+Short, practical posts. No buzzword soup. Lessons from real products: designing for the phone your customer actually has, backups you can trust, and why the AI in RasteScan is never allowed to decide alone.
 
 Got a topic you'd like us to write about? [Send it over](/contact/). We read everything.

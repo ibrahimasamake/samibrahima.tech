@@ -15,8 +15,8 @@ export const timeline: TimelineItem[] = [
     kind: "Product",
     points: [
       "Founded and built a marketplace and shop-management platform for Mali.",
-      "Backend, web app, back office and Android app, as one experience.",
-      "Run production alone on Kubernetes with automated deploys, backups and written post-mortems.",
+      "Web app, Android app and back office, as one experience for shops and buyers.",
+      "Keep it running every day, so shops never lose a sale.",
     ],
   },
   {

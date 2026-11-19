@@ -1,5 +1,5 @@
 /**
- * "production" = used in a live product (Sougba, Nafas Perfumes).
+ * "production" = used in live products.
  * "project" = used in a delivered team or training project.
  * Keep this honest: it is what the expertise section shows.
  */
@@ -35,8 +35,7 @@ export const skillGroups: SkillGroup[] = [
     items: [
       { name: "Java 21", level: "production" },
       { name: "Spring Boot 3", level: "production" },
-      { name: "Spring Cloud Gateway", level: "production" },
-      { name: "REST & gRPC APIs", level: "production" },
+      { name: "REST APIs", level: "production" },
       { name: "Kafka", level: "production" },
       { name: "Node.js / Express", level: "project" },
       { name: "Python, FastAPI, Flask", level: "project" },
@@ -48,7 +47,6 @@ export const skillGroups: SkillGroup[] = [
       { name: "PostgreSQL", level: "production" },
       { name: "MongoDB", level: "production" },
       { name: "Redis", level: "production" },
-      { name: "Typesense", level: "production" },
       { name: "MySQL, SQLite", level: "project" },
     ],
   },
@@ -56,7 +54,7 @@ export const skillGroups: SkillGroup[] = [
     name: "Cloud & DevOps",
     items: [
       { name: "Docker", level: "production" },
-      { name: "Kubernetes (k3s)", level: "production" },
+      { name: "Kubernetes", level: "production" },
       { name: "Argo CD", level: "production" },
       { name: "Jenkins", level: "production" },
       { name: "GitHub Actions", level: "production" },

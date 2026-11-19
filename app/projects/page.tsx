@@ -10,7 +10,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   title: "Projects & case studies",
   description:
-    "Case studies: Sougba marketplace, Fere point of sale and inventory, Nafas Perfumes online shop, RasteScan civic AI, and cloud & DevOps platforms on Kubernetes and AWS.",
+    "Case studies: Sougba marketplace, Fere point of sale and inventory, Nafas Perfumes online shop, RasteScan civic AI, and cloud deployments on AWS.",
   path: "/projects",
 });
 

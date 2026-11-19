@@ -82,8 +82,7 @@ export default function AboutPage() {
             <p>
               In 2024 came <Link href="/projects/sougba/">Sougba</Link>, a marketplace for Mali. Shops go online by
               neighbourhood, customers reach them directly, and owners see sales and stock from their phone with{" "}
-              <Link href="/projects/fere/">Fere</Link>. Designed, built and run in production with automated deploys,
-              backups and honest post-mortems.
+              <Link href="/projects/fere/">Fere</Link>. Designed, built and kept running every day.
             </p>
             <p>
               Then the online store of <Link href="/projects/nafas-perfumes/">Nafas Perfumes</Link> in Bengaluru, and{" "}

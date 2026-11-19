@@ -57,7 +57,7 @@ export const projects: Project[] = [
     category: "Marketplace · Web & mobile",
     context: "Own product",
     period: "Oct 2024 – present",
-    role: "Founder, product designer and engineering lead",
+    role: "Founder and product lead",
     summary:
       "Sougba connects buyers, shops and service providers in Mali. Shops go online by neighbourhood, buyers reach them directly on WhatsApp, and owners run their shop with Fere, the built-in workspace for stock and sales.",
     challenge: [
@@ -65,83 +65,35 @@ export const projects: Project[] = [
       "Existing tools are built for other markets: expensive, English-only and heavy on mobile data.",
     ],
     solution: [
-      "One product with three clients on a shared API: a server-rendered Angular web app, a Flutter app on Google Play and an Angular back office for the team.",
-      "French first, built for low-end Android phones and costly data: server-side rendering, small images and a phone-first layout.",
-      "Every feature ships on web and mobile together, so merchants and buyers get the same experience everywhere.",
+      "One product on the web, on Android and in a back office for the team, so merchants and buyers get the same experience everywhere.",
+      "French first, built for low-end Android phones and costly data: fast pages, small images and a phone-first layout.",
+      "Every feature ships on web and mobile together.",
     ],
     features: [
-      { title: "Public marketplace", text: "Products, services, shops and buyer requests, with fast search and SEO-friendly pages." },
+      { title: "Public marketplace", text: "Products, services, shops and buyer requests, with fast search and pages that are easy to find on Google." },
       { title: "Near you", text: "Shops and products by neighbourhood, so buyers find what is close." },
       { title: "Direct contact", text: "Buyers message the seller on WhatsApp, no middleman." },
       { title: "Fere workspace", text: "Each shop gets a till, a stock book and customer records on its phone." },
-      { title: "Back office", text: "A staff-only Angular app to moderate shops and content." },
-      { title: "Real-time", text: "Chat, push and email notifications from one service." },
+      { title: "Back office", text: "Tools for the team to welcome new shops and keep the marketplace tidy." },
+      { title: "Notifications", text: "Shops and buyers hear about what matters to them, on web and mobile." },
     ],
-    tech: [
-      { group: "Backend", items: ["Java 21", "Spring Boot 3", "Spring Cloud Gateway", "Kafka", "gRPC"] },
-      { group: "Data", items: ["PostgreSQL (schema per service)", "MongoDB", "Redis", "Typesense"] },
-      { group: "Web & mobile", items: ["Angular 21 (SSR)", "Tailwind CSS", "Flutter"] },
-      { group: "Platform", items: ["Kubernetes (k3s)", "Argo CD", "Jenkins", "Private registry", "Ansible", "Cloudflare Tunnel", "Tailscale"] },
-    ],
-    architecture: {
-      layers: [
-        {
-          label: "Clients",
-          nodes: [
-            { name: "Web app", detail: "Angular 21 · SSR" },
-            { name: "Mobile app", detail: "Flutter · Google Play" },
-            { name: "Back office", detail: "Angular · staff only" },
-          ],
-        },
-        { label: "Edge", nodes: [{ name: "Cloudflare", detail: "DNS · TLS · CDN · Tunnel, no open ports" }] },
-        { label: "Gateway", nodes: [{ name: "API gateway", detail: "Spring Cloud Gateway · JWT · rate limiting" }] },
-        {
-          label: "Services (Kubernetes, deployed by Argo CD)",
-          nodes: [
-            { name: "Auth & users", detail: "RS256 JWT · JWKS" },
-            { name: "Catalog & requests", detail: "search · offers" },
-            { name: "Fere workspace", detail: "POS · stock · CRM" },
-            { name: "Real-time", detail: "chat · push · email" },
-          ],
-        },
-        {
-          label: "Shared infrastructure",
-          nodes: [
-            { name: "Kafka", detail: "events" },
-            { name: "gRPC", detail: "service calls" },
-            { name: "PostgreSQL · MongoDB · Redis" },
-            { name: "Typesense", detail: "search" },
-            { name: "Object storage" },
-          ],
-        },
-      ],
-      note: "Simplified. The backend runs 10+ Spring Boot services; these four groups carry most of the traffic.",
-    },
+    tech: [{ group: "Platforms", items: ["Web app", "Android app (Google Play)", "Team back office"] }],
     contribution: [
-      "Founded the product and designed the system end to end",
-      "Wrote most of the code: backend services, web app, back office and mobile app",
-      "Operate production: deployments, backups, monitoring and incident response",
+      "Founded the product and shaped it with shop owners and buyers",
+      "Designed and built the web app, the mobile app and the back office",
+      "Keeps it running every day for shops and buyers",
     ],
     challenges: [
       {
-        problem: "Too many small services early on meant slow deploys and more things to break.",
-        solution: "Merged several of them (users into auth, notifications into real-time). Fewer moving parts, faster deploys, same features.",
-      },
-      {
-        problem: "A scheduled clean-up job once deleted products it should have kept.",
-        solution: "Restored them from the latest backup the same morning, wrote a post-mortem, then added a nightly photo mirror with a 7-day trash and a freshness check in the health report.",
-      },
-      {
         problem: "Buyers use low-end phones on expensive data.",
-        solution: "Server-side rendering, small images and French-first copy shaped every screen.",
+        solution: "Fast-loading pages, small images and French-first, plain-language copy shaped every screen.",
+      },
+      {
+        problem: "Shops already sell on WhatsApp and will not switch habits overnight.",
+        solution: "Sougba connects to WhatsApp instead of replacing it: buyers find the shop online, then talk to the seller where they already do.",
       },
     ],
-    outcomes: [
-      "Live at sougba.com, with the Android app on Google Play",
-      "About 20 Kubernetes deployments managed through GitOps; a rollback is a git revert",
-      "Databases backed up every 30 minutes with 14-day retention",
-      "A standby cluster, proven with a real failover drill (no data lost)",
-    ],
+    outcomes: ["Live at sougba.com, with the Android app on Google Play"],
     cover: {
       src: "/images/projects/sougba/home-desktop.jpg",
       alt: "Sougba marketplace home page showing product categories and the most viewed products in Bamako",
@@ -168,7 +120,7 @@ export const projects: Project[] = [
       },
     ],
     links: [{ label: "Visit sougba.com", href: "https://sougba.com" }],
-    services: ["ecommerce", "web-development", "mobile-apps", "custom-software", "cloud-devops"],
+    services: ["ecommerce", "web-development", "mobile-apps", "custom-software"],
     featured: true,
     similar: "Planning a marketplace or a platform with web and mobile apps?",
   },
@@ -179,7 +131,7 @@ export const projects: Project[] = [
     category: "Business software · POS & inventory",
     context: "Own product",
     period: "2024 – present",
-    role: "Product designer and full-stack engineer",
+    role: "Product designer and developer",
     summary:
       "Fere is the merchant workspace inside Sougba: a private back office where a shop manages its catalogue, stock, quick sales, customers, team and branches, and publishes products to the marketplace.",
     challenge: [
@@ -188,12 +140,12 @@ export const projects: Project[] = [
     ],
     solution: [
       "A workspace that starts with what an owner does every day: add a product with a photo, sell it, see what is left.",
-      "Every sale updates stock automatically, and every movement is recorded.",
+      "Every sale updates the stock by itself, and every change is recorded.",
       "The same workspace publishes products to the Sougba marketplace, so going online is one step, not a second system.",
     ],
     features: [
       { title: "Catalogue", text: "Products with photos, category, brand, SKU, barcode, purchase and sale price." },
-      { title: "Stock & movements", text: "Quantities per branch, alert thresholds and a history of every movement." },
+      { title: "Stock & movements", text: "Quantities per branch, low-stock alerts and a history of every movement." },
       { title: "Quick sale", text: "A fast point-of-sale screen, plus QR checkout." },
       { title: "Sales history", text: "Every sale, searchable, with what was sold and for how much." },
       { title: "Customers & suppliers", text: "Customer records and supplier contacts in one place." },
@@ -201,40 +153,20 @@ export const projects: Project[] = [
       { title: "Publications", text: "Push products from the private catalogue to the public marketplace." },
       { title: "Reports", text: "A dashboard with the numbers an owner checks first." },
     ],
-    tech: [
-      { group: "Backend", items: ["Java 21", "Spring Boot 3", "PostgreSQL", "Kafka"] },
-      { group: "Frontend", items: ["Angular 21", "Tailwind CSS", "Flutter"] },
-      { group: "Platform", items: ["Kubernetes (k3s)", "Argo CD", "Jenkins"] },
-    ],
-    architecture: {
-      layers: [
-        { label: "Clients", nodes: [{ name: "Fere web workspace", detail: "Angular" }, { name: "Sougba mobile app", detail: "Flutter · Workspace tab" }] },
-        { label: "Gateway", nodes: [{ name: "API gateway", detail: "JWT · roles per branch" }] },
-        {
-          label: "Fere service",
-          nodes: [
-            { name: "Catalogue & stock" },
-            { name: "Sales & POS" },
-            { name: "Customers & suppliers" },
-            { name: "Team & branches" },
-          ],
-        },
-        { label: "Data & events", nodes: [{ name: "PostgreSQL", detail: "own schema" }, { name: "Kafka", detail: "publish to marketplace" }] },
-      ],
-    },
+    tech: [{ group: "Platforms", items: ["Web workspace", "Inside the Sougba mobile app"] }],
     contribution: [
       "Designed the workspace around a shop owner's daily routine",
-      "Built the Fere service, the web workspace and its mobile entry point",
+      "Built the workspace on web and its place in the mobile app",
       "Connected it to the marketplace so products publish in one step",
     ],
     challenges: [
       {
-        problem: "Stock and sales drift apart when they are entered in two places.",
-        solution: "A sale is a stock movement. The point of sale writes the movement, so the stock count is always the result of recorded events.",
+        problem: "Stock and sales drift apart when they are written in two places.",
+        solution: "Selling and stock are one action: a sale updates the stock count immediately, so the numbers always agree.",
       },
       {
         problem: "One business, several branches, different staff.",
-        solution: "Branches and roles are part of the data model from the start, so each person sees and changes only what they should.",
+        solution: "Branches and roles are built in, so each person sees and changes only what they should.",
       },
     ],
     outcomes: ["Live inside Sougba as the free workspace for shops"],
@@ -420,76 +352,6 @@ export const projects: Project[] = [
     services: ["ai-automation", "web-development", "mobile-apps", "cloud-devops"],
     featured: true,
     similar: "Thinking about an AI feature you can actually trust?",
-  },
-  {
-    slug: "sougba-platform",
-    name: "Sougba production platform",
-    tagline: "GitOps, backups and failover for a platform run by one engineer.",
-    category: "Cloud & DevOps",
-    context: "Own product",
-    period: "2024 – present",
-    role: "Platform engineer and sole operator",
-    summary:
-      "The infrastructure behind Sougba: one identical path from commit to production for every service, backups that have been restored for real, and a standby cluster that has passed a failover drill.",
-    challenge: [
-      "One person runs 10+ services, their databases and three client apps. Every manual step is a future outage.",
-      "Releases have to be routine, rollbacks instant, and data loss impossible to miss.",
-    ],
-    solution: [
-      "On every pull request, GitHub Actions runs the same build and tests; red never merges.",
-      "Jenkins builds each service's image, tags it with the build number and pushes it to a private registry.",
-      "The pipeline updates the image tag in that service's deploy repository (Kubernetes manifests with Kustomize).",
-      "Argo CD sees the change and syncs the cluster. A rollback is a git revert.",
-      "Cloudflare Tunnel brings traffic in with no open ports; Tailscale gives private admin access.",
-    ],
-    features: [
-      { title: "One pipeline for every service", text: "The same steps everywhere, so releasing is boring." },
-      { title: "GitOps with Argo CD", text: "The cluster always matches what is in git." },
-      { title: "Backups", text: "PostgreSQL and MongoDB to object storage every 30 minutes, 14-day retention; product photos mirrored nightly with a 7-day trash." },
-      { title: "Health reports", text: "An automated check of production every 30 minutes." },
-      { title: "Standby cluster", text: "Proven with a real failover drill, with no data lost." },
-      { title: "Post-mortems", text: "Every incident gets a short written review and a fix that prevents a repeat." },
-    ],
-    tech: [
-      { group: "Orchestration", items: ["Kubernetes (k3s)", "Kustomize", "Argo CD"] },
-      { group: "CI", items: ["GitHub Actions", "Jenkins", "Private Docker registry"] },
-      { group: "Network & access", items: ["Cloudflare (DNS, TLS, CDN, Tunnel)", "Tailscale", "Nginx"] },
-      { group: "Automation", items: ["Ansible", "Linux"] },
-    ],
-    architecture: {
-      layers: [
-        { label: "Commit", nodes: [{ name: "Pull request", detail: "GitHub Actions build + tests" }] },
-        { label: "Build", nodes: [{ name: "Jenkins", detail: "build · test · image" }, { name: "Private registry", detail: "versioned images" }] },
-        { label: "Declare", nodes: [{ name: "Deploy repository", detail: "Kustomize manifests · image tag bump" }] },
-        { label: "Sync", nodes: [{ name: "Argo CD", detail: "watches git, syncs cluster" }] },
-        { label: "Run", nodes: [{ name: "k3s cluster", detail: "~20 deployments" }, { name: "Standby cluster", detail: "failover tested" }] },
-      ],
-      note: "Every deploy is a commit; every rollback is a revert.",
-    },
-    contribution: ["Designed, built and operate the whole platform alone"],
-    challenges: [
-      {
-        problem: "A clean-up job silently deleted data it should have kept.",
-        solution: "Same-morning restore from backup, then a nightly photo mirror with a trash and a freshness check, so it can never be silent again.",
-      },
-    ],
-    outcomes: [
-      "About 20 Kubernetes deployments (services and shared infrastructure) managed through GitOps",
-      "Backups every 30 minutes with 14-day retention",
-      "Failover to a standby cluster proven in a drill",
-    ],
-    cover: {
-      src: "/images/projects/devops/gitops-pipeline.jpg",
-      alt: "Diagram of the deployment pipeline: Jenkins builds an image, the deploy repo is updated, Argo CD syncs Kubernetes",
-      width: 1200,
-      height: 1200,
-      kind: "photo",
-    },
-    gallery: [],
-    links: [{ label: "Read: running a platform as one person", href: "/blog/gitops-solo-developer.html" }],
-    services: ["cloud-devops"],
-    featured: true,
-    similar: "Want deploys that are routine and backups you can trust?",
   },
   {
     slug: "travel-memory-aws",

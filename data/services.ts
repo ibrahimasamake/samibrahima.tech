@@ -61,7 +61,7 @@ export const services: Service[] = [
     ],
     faqs: [
       { q: "Can I edit the content myself?", a: "Yes. Where content changes often, you get simple admin screens. Nafas Perfumes' owner adds perfumes and changes prices alone." },
-      { q: "Will it work on low-end phones?", a: "That is the default. Sougba was designed for low-end Android phones and expensive mobile data: server-side rendering and small images." },
+      { q: "Will it work on low-end phones?", a: "That is the default. Sougba was designed for low-end Android phones and expensive mobile data, and it shows in every screen." },
     ],
   },
   {
@@ -162,7 +162,7 @@ export const services: Service[] = [
       "Product pages built to be found in search",
       "Deployment, backups and a hand-over walkthrough",
     ],
-    stack: ["Next.js", "Angular (SSR)", "PostgreSQL", "Razorpay", "Typesense", "Spring Boot", "Docker"],
+    stack: ["Next.js", "Angular (SSR)", "PostgreSQL", "Razorpay", "Spring Boot", "Docker"],
     proof: ["nafas-perfumes", "sougba", "fere"],
     goodFit: [
       "Customers only find you if they walk past your shop",
@@ -187,9 +187,9 @@ export const services: Service[] = [
     offerings: [
       { title: "AWS infrastructure", text: "VPCs, load balancers, auto scaling, HTTPS certificates, defined in Terraform." },
       { title: "Cloud deployment", text: "Move an app from a laptop or a shared host to a reliable, reproducible setup." },
-      { title: "Docker & Kubernetes", text: "Containerised services on Kubernetes (k3s), managed declaratively." },
+      { title: "Docker & Kubernetes", text: "Containerised services on Kubernetes, managed declaratively." },
       { title: "CI/CD & GitOps", text: "Jenkins or GitHub Actions to build and test; Argo CD to deploy. Every deploy is a commit." },
-      { title: "Linux administration", text: "Servers, Nginx, networking, Cloudflare Tunnel and private access with Tailscale." },
+      { title: "Linux administration", text: "Servers, Nginx, networking, Cloudflare and secure private access." },
       { title: "Infrastructure automation", text: "Ansible playbooks and Terraform modules instead of manual steps." },
       { title: "Monitoring & backups", text: "Scheduled health reports, database backups with retention, and restore drills." },
     ],
@@ -200,8 +200,8 @@ export const services: Service[] = [
       "Health checks and alerts",
       "A written runbook for your team",
     ],
-    stack: ["AWS", "Terraform", "Docker", "Kubernetes (k3s)", "Argo CD", "Jenkins", "GitHub Actions", "Ansible", "Nginx", "Cloudflare", "Linux"],
-    proof: ["sougba-platform", "travel-memory-aws", "rastescan"],
+    stack: ["AWS", "Terraform", "Docker", "Kubernetes", "Argo CD", "Jenkins", "GitHub Actions", "Ansible", "Nginx", "Cloudflare", "Linux"],
+    proof: ["travel-memory-aws", "rastescan"],
     goodFit: [
       "Deploys are manual, scary, and only one person knows how",
       "You have never restored a backup, so you do not know if you have one",
