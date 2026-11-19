@@ -17,7 +17,12 @@ export const metadata = pageMetadata({
   description:
     "Ibrahima Samake: founder of Sougba and SAM Informatique Mali, full-stack and DevOps engineer building web, mobile and cloud software for businesses since 2018.",
   path: "/about",
-  image: { url: profile.portrait.src, width: profile.portrait.width, height: profile.portrait.height, alt: profile.portrait.alt },
+  image: {
+    url: profile.aboutPortrait.src,
+    width: profile.aboutPortrait.width,
+    height: profile.aboutPortrait.height,
+    alt: profile.aboutPortrait.alt,
+  },
 });
 
 export default function AboutPage() {
@@ -34,13 +39,13 @@ export default function AboutPage() {
           <div className="lg:sticky lg:top-24 lg:self-start">
             <div className="overflow-hidden rounded-[2rem] border border-border bg-surface">
               <Image
-                src={profile.portrait.src}
-                alt={profile.portrait.alt}
-                width={profile.portrait.width}
-                height={profile.portrait.height}
+                src={profile.aboutPortrait.src}
+                alt={profile.aboutPortrait.alt}
+                width={profile.aboutPortrait.width}
+                height={profile.aboutPortrait.height}
                 priority
                 sizes="(min-width: 1024px) 40vw, 100vw"
-                className="aspect-square w-full object-cover"
+                className="aspect-[3/4] w-full object-cover object-top"
               />
             </div>
             <dl className="mt-6 grid grid-cols-2 gap-4 text-sm">

@@ -24,6 +24,13 @@ export const profile = {
     width: 900,
     height: 900,
   },
+  /** Second, more personal photo used on the About page. */
+  aboutPortrait: {
+    src: "/images/about/ibrahima-samake-black-shirt.jpg",
+    alt: "Ibrahima Samake in a black shirt, resting his chin on his hand",
+    width: 1050,
+    height: 1400,
+  },
   cv: {
     en: "/cv/Ibrahima-Samake-CV.pdf",
     fr: "/cv/Ibrahima-Samake-CV-FR.pdf",
