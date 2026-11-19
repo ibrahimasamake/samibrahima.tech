@@ -11,12 +11,15 @@ export function PageHeader({
   title,
   lead,
   children,
+  visual,
 }: {
   crumbs: { name: string; path: string }[];
   eyebrow?: string;
   title: ReactNode;
   lead?: ReactNode;
   children?: ReactNode;
+  /** Optional illustration shown beside the title on large screens. */
+  visual?: ReactNode;
 }) {
   const all = [{ name: "Home", path: "/" }, ...crumbs];
   return (
@@ -41,7 +44,8 @@ export function PageHeader({
             ))}
           </ol>
         </nav>
-        <div className="mt-10 max-w-3xl">
+        <div className={visual ? "mt-10 grid items-center gap-12 lg:grid-cols-[1.15fr_1fr]" : ""}>
+        <div className={visual ? "max-w-3xl" : "mt-10 max-w-3xl"}>
           {eyebrow && <p className="eyebrow animate-rise mb-4">{eyebrow}</p>}
           <h1
             className="animate-settle text-4xl leading-[1.08] font-semibold text-fg sm:text-5xl lg:text-6xl"
@@ -59,6 +63,12 @@ export function PageHeader({
               {children}
             </div>
           )}
+        </div>
+        {visual && (
+          <div className="animate-rise hidden lg:block" style={{ ["--delay" as string]: "180ms" }}>
+            {visual}
+          </div>
+        )}
         </div>
       </div>
       <JsonLd data={graph(breadcrumbJsonLd(all))} />

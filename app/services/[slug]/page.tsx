@@ -7,6 +7,7 @@ import { PageHeader } from "@/components/layout/page-header";
 import { ProjectCard } from "@/components/projects/project-card";
 import { CtaBand } from "@/components/sections/cta-band";
 import { ServiceIcon } from "@/components/sections/service-icon";
+import { ServiceArt } from "@/components/visuals/service-art";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
 import { Section, SectionHeading } from "@/components/ui/section";
@@ -46,6 +47,7 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
         eyebrow={s.name}
         title={s.headline}
         lead={s.summary}
+        visual={<ServiceArt slug={s.slug} className="rounded-3xl border border-border bg-surface/60" />}
       >
         <div className="flex flex-col gap-3 sm:flex-row">
           <ButtonLink href={`/start-a-project?type=${encodeURIComponent(typeFor(s.slug))}`} size="lg">
@@ -94,7 +96,9 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
               ))}
             </ul>
           </div>
-          <div className="rounded-3xl border border-border bg-surface p-7 sm:p-9">
+          <div className="overflow-hidden rounded-3xl border border-border bg-surface">
+            <ServiceArt slug={s.slug} className="border-b border-border bg-bg/40 lg:hidden" />
+            <div className="p-7 sm:p-9">
             <ServiceIcon slug={s.slug} className="size-6 text-accent" />
             <h2 className="mt-5 text-2xl font-semibold text-fg">A good fit if…</h2>
             <ul className="mt-5 grid gap-4">
@@ -104,6 +108,7 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
                 </li>
               ))}
             </ul>
+            </div>
           </div>
         </div>
       </Section>

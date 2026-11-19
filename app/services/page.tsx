@@ -4,6 +4,7 @@ import { Reveal } from "@/components/animations/reveal";
 import { PageHeader } from "@/components/layout/page-header";
 import { CtaBand } from "@/components/sections/cta-band";
 import { ServiceIcon } from "@/components/sections/service-icon";
+import { ServiceArt } from "@/components/visuals/service-art";
 import { ButtonLink } from "@/components/ui/button";
 import { getProject } from "@/data/projects";
 import { services } from "@/data/services";
@@ -66,6 +67,8 @@ export default function ServicesPage() {
                   </p>
                 )}
               </div>
+              <div className="grid content-start gap-8">
+              <ServiceArt slug={s.slug} className="rounded-2xl border border-border bg-bg/40" />
               <ul className="grid content-start gap-x-8 gap-y-5 sm:grid-cols-2">
                 {s.offerings.map((o) => (
                   <li key={o.title} className="border-t border-border pt-4">
@@ -74,6 +77,7 @@ export default function ServicesPage() {
                   </li>
                 ))}
               </ul>
+              </div>
             </article>
           </Reveal>
         ))}

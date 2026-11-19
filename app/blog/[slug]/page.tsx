@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PostCard } from "@/components/blog/post-card";
+import { BlogArt } from "@/components/visuals/blog-art";
 import { JsonLd } from "@/components/layout/json-ld";
 import { PageHeader } from "@/components/layout/page-header";
 import { ButtonLink } from "@/components/ui/button";
@@ -56,11 +57,15 @@ export default async function PostPage({ params }: PageProps<"/blog/[slug]">) {
 
       <div className="container-page grid gap-12 py-12 sm:py-16 lg:grid-cols-[1fr_15rem]">
         <div className="min-w-0">
-          {post.cover && (
-            <div className="mb-12 overflow-hidden rounded-3xl border border-border">
+          <div className="mb-12 overflow-hidden rounded-3xl border border-border">
+            {post.cover ? (
               <Image src={post.cover} alt="" width={1200} height={675} priority className="max-h-[480px] w-full object-cover object-top" />
-            </div>
-          )}
+            ) : (
+              <div className="aspect-[16/8]">
+                <BlogArt category={post.category} seed={post.slug} />
+              </div>
+            )}
+          </div>
           <div className="article" dangerouslySetInnerHTML={{ __html: post.html }} />
 
           {post.tags.length > 0 && (

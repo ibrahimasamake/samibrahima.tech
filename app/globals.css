@@ -308,3 +308,119 @@
     border: 1px solid var(--border);
   }
 }
+
+/* ---------- Illustration motion (SVG art) ---------- */
+@keyframes art-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+@keyframes art-dash {
+  to {
+    stroke-dashoffset: -48;
+  }
+}
+@keyframes art-grow {
+  0%,
+  100% {
+    transform: scaleY(0.55);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+@keyframes art-pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes art-travel {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(var(--d, 100px));
+    opacity: 0;
+  }
+}
+@keyframes art-pop {
+  0%,
+  70%,
+  100% {
+    transform: scale(1);
+  }
+  80% {
+    transform: scale(1.3);
+  }
+}
+@keyframes art-type {
+  0%,
+  100% {
+    transform: scaleX(0.25);
+  }
+  50% {
+    transform: scaleX(1);
+  }
+}
+@keyframes art-steam {
+  0% {
+    transform: translateY(4px);
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+}
+
+@layer components {
+  .art * {
+    transform-box: fill-box;
+  }
+  .art-float {
+    animation: art-float 5s ease-in-out infinite;
+  }
+  .art-dash {
+    stroke-dasharray: 6 6;
+    animation: art-dash 2.4s linear infinite;
+  }
+  .art-grow {
+    transform-origin: bottom;
+    animation: art-grow 3.2s ease-in-out infinite;
+  }
+  .art-pulse {
+    animation: art-pulse 2.6s ease-in-out infinite;
+  }
+  .art-travel {
+    animation: art-travel 3s ease-in-out infinite;
+  }
+  .art-pop {
+    transform-origin: center;
+    animation: art-pop 3.5s ease-in-out infinite;
+  }
+  .art-type {
+    transform-origin: left;
+    animation: art-type 4s ease-in-out infinite;
+  }
+  .art-steam {
+    animation: art-steam 2.8s ease-out infinite;
+  }
+}

@@ -1,4 +1,4 @@
-import { ArrowRight, ArrowUpRight, Award, Check } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Award, Check, Hammer, PenLine, Rocket } from "lucide-react";
 import Link from "next/link";
 import { Reveal } from "@/components/animations/reveal";
 import { PostCard } from "@/components/blog/post-card";
@@ -6,6 +6,7 @@ import { ProjectCard } from "@/components/projects/project-card";
 import { CtaBand } from "@/components/sections/cta-band";
 import { ProcessSteps } from "@/components/sections/process-steps";
 import { ProductShowcase } from "@/components/sections/product-showcase";
+import { StoryArt } from "@/components/visuals/story-art";
 import { ServicesGrid } from "@/components/sections/services-grid";
 import { TechExpertise } from "@/components/sections/tech-expertise";
 import { ButtonLink } from "@/components/ui/button";
@@ -17,6 +18,7 @@ import { featuredProjects } from "@/data/projects";
 import { getAllPosts } from "@/lib/blog";
 import { pageMetadata } from "@/lib/seo";
 import { cn } from "@/lib/utils";
+import { ReasonIcon } from "@/components/visuals/icons";
 
 export const metadata = pageMetadata({
   title: siteConfig.title,
@@ -32,9 +34,9 @@ const proof = [
 ];
 
 const statusStyle = {
-  live: { label: "Live", dot: "bg-success", text: "text-success" },
-  building: { label: "Building", dot: "bg-accent", text: "text-accent" },
-  writing: { label: "Writing", dot: "bg-amber-400", text: "text-amber-500 dark:text-amber-300" },
+  live: { label: "Live", dot: "bg-success", text: "text-success", icon: Rocket },
+  building: { label: "Building", dot: "bg-accent", text: "text-accent", icon: Hammer },
+  writing: { label: "Writing", dot: "bg-amber-400", text: "text-amber-500 dark:text-amber-300", icon: PenLine },
 } as const;
 
 export default function HomePage() {
@@ -116,6 +118,9 @@ export default function HomePage() {
             <h2 id="story-title" className="mt-4 text-3xl leading-tight font-semibold text-fg sm:text-4xl">
               Great businesses shouldn&apos;t be invisible online.
             </h2>
+            <div className="mt-10 overflow-hidden rounded-3xl border border-border">
+              <StoryArt />
+            </div>
           </Reveal>
           <Reveal delay={0.08} className="prose-body text-lg">
             <p className="text-xl text-fg/90">
@@ -196,10 +201,15 @@ export default function HomePage() {
               const st = statusStyle[n.status];
               const body = (
                 <>
-                  <p className={cn("inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider", st.text)}>
-                    <span className={cn("size-1.5 rounded-full", st.dot, n.status !== "live" && "animate-pulse")} aria-hidden />
-                    {st.label}
-                  </p>
+                  <div className="flex items-center justify-between">
+                    <p className={cn("inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider", st.text)}>
+                      <span className={cn("size-1.5 rounded-full", st.dot, n.status !== "live" && "animate-pulse")} aria-hidden />
+                      {st.label}
+                    </p>
+                    <span className={cn("grid size-9 place-items-center rounded-xl border border-border bg-bg", st.text)}>
+                      <st.icon className="size-4" aria-hidden />
+                    </span>
+                  </div>
                   <h3 className="mt-3 font-semibold text-fg">{n.title}</h3>
                   <p className="mt-2 text-[15px] leading-relaxed text-muted">{n.text}</p>
                   {n.href && (
@@ -235,7 +245,7 @@ export default function HomePage() {
           <ul className="mt-12 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
             {reasons.map((r, i) => (
               <Reveal as="li" key={r.title} delay={(i % 4) * 0.05}>
-                <span className="block h-px w-10 bg-accent" aria-hidden />
+                <ReasonIcon index={i} />
                 <h3 className="mt-5 font-semibold text-fg">{r.title}</h3>
                 <p className="mt-2 text-[15px] leading-relaxed text-muted">{r.text}</p>
               </Reveal>

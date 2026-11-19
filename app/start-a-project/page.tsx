@@ -2,6 +2,7 @@ import { Clock, Lock, MessageSquare } from "lucide-react";
 import { Suspense } from "react";
 import { ProjectEnquiryForm } from "@/components/forms/project-enquiry-form";
 import { PageHeader } from "@/components/layout/page-header";
+import { ChatArt } from "@/components/visuals/misc-art";
 import { profile } from "@/data/profile";
 import { pageMetadata } from "@/lib/seo";
 
@@ -26,6 +27,7 @@ export default function StartProjectPage() {
         eyebrow="Start a project"
         title="So, what are we building?"
         lead="Share a few details and get back an honest plan: how we would approach it, a realistic timeline and a cost range. No obligation, no sales pitch."
+        visual={<ChatArt />}
       />
       <div className="container-page grid gap-10 py-14 sm:py-20 lg:grid-cols-[1fr_20rem] lg:gap-14">
         <Suspense fallback={<div className="h-[560px] animate-pulse rounded-3xl border border-border bg-surface" aria-label="Loading form" />}>

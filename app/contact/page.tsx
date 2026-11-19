@@ -1,6 +1,7 @@
 import { ArrowRight, ArrowUpRight, Mail } from "lucide-react";
 import { ContactForm } from "@/components/forms/contact-form";
 import { PageHeader } from "@/components/layout/page-header";
+import { ChatArt } from "@/components/visuals/misc-art";
 import { ButtonLink } from "@/components/ui/button";
 import { profile, socialLinks } from "@/data/profile";
 import { pageMetadata } from "@/lib/seo";
@@ -19,6 +20,7 @@ export default function ContactPage() {
         eyebrow="Contact"
         title="Say hello. We don't bite."
         lead="A question, a crazy idea, a partnership, or a project that does not fit in a form. Every message gets a real reply, in English or French."
+        visual={<ChatArt />}
       />
       <div className="container-page grid gap-12 py-14 sm:py-20 lg:grid-cols-[22rem_1fr] lg:gap-16">
         <div className="grid content-start gap-8">
