@@ -23,7 +23,7 @@ export default function ServicesPage() {
         crumbs={[{ name: "Services", path: "/services" }]}
         eyebrow="Services"
         title="Everything it takes to put your product in production."
-        lead="Pick one service or combine them. Most projects mix a web app, a mobile app and the infrastructure to run both, and you deal with one person for all of it."
+        lead="Pick one or mix them. Most projects combine a web app, a mobile app and the infrastructure to run both, with one team and one conversation for all of it."
       >
         <ButtonLink href="/start-a-project" size="lg">
           Start your project <ArrowRight aria-hidden />
@@ -78,7 +78,7 @@ export default function ServicesPage() {
           </Reveal>
         ))}
       </div>
-      <CtaBand title="Not sure which service you need?" text="Describe the problem instead. I will suggest the simplest solution that solves it, and tell you honestly if you do not need custom software at all." />
+      <CtaBand title="Not sure which service you need?" text="Describe the problem instead. You will get the simplest solution that solves it, and an honest “you don’t need custom software” when that is the truth." />
     </>
   );
 }

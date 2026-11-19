@@ -4,7 +4,7 @@ export const processSteps = [
     name: "Discovery",
     summary: "Understand the business and requirements.",
     detail:
-      "A conversation about your business, your customers and the problem. I ask how things work today, what it costs you, and what success looks like.",
+      "A conversation about your business, your customers and the problem. We ask how things work today, what it costs you, and what success looks like.",
     output: "A short written summary of goals, users and constraints.",
   },
   {
@@ -12,7 +12,7 @@ export const processSteps = [
     name: "Planning",
     summary: "Define scope, architecture and timeline.",
     detail:
-      "We agree what the first version includes and what waits. I choose the simplest architecture that meets your needs and split the work into milestones.",
+      "We agree what the first version includes and what waits. We choose the simplest architecture that meets your needs and split the work into milestones.",
     output: "Scope, milestones, timeline and a fixed quote or estimate.",
   },
   {
@@ -52,11 +52,11 @@ export const processSteps = [
 export const reasons = [
   {
     title: "Built around your business",
-    text: "I start with how your business works and what it needs, not with a template or a favourite technology.",
+    text: "Every project starts with how your business works, not with a template or a favourite technology.",
   },
   {
     title: "Modern, proven technology",
-    text: "Next.js, Angular, Flutter, Spring Boot and Kubernetes: the same stack I run in production for my own platform.",
+    text: "Next.js, Angular, Flutter, Spring Boot and Kubernetes: the same stack that runs our own products in production.",
   },
   {
     title: "Architecture that can grow",
@@ -68,7 +68,7 @@ export const reasons = [
   },
   {
     title: "Clear, direct communication",
-    text: "You talk to the engineer building your product, in English or French. Weekly progress you can open and try.",
+    text: "You talk to the people building your product, in English or French. Weekly progress you can open and try.",
   },
   {
     title: "Focused on outcomes",
@@ -76,7 +76,7 @@ export const reasons = [
   },
   {
     title: "Deployment and support included",
-    text: "I do not stop at the code: hosting, HTTPS, backups, monitoring and the agreed support after launch.",
+    text: "The work does not stop at the code: hosting, HTTPS, backups, monitoring and the agreed support after launch.",
   },
   {
     title: "You own everything",

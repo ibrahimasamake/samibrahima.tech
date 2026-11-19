@@ -11,9 +11,11 @@ type PageMeta = {
 };
 
 /** Consistent title, description, canonical, Open Graph and Twitter tags. */
-export function pageMetadata({ title, description, path, image, type = "website" }: PageMeta): Metadata {
+export function pageMetadata({ title, description, path: rawPath, image, type = "website" }: PageMeta): Metadata {
+  // Static hosting serves every page as /path/, so canonical URLs end with a slash.
+  const path = rawPath.endsWith("/") ? rawPath : `${rawPath}/`;
   // Fall back to the generated site-wide preview so every page has a share image.
-  const images = [image ?? { url: "/opengraph-image", width: 1200, height: 630, alt: siteConfig.title }];
+  const images = [image ?? { url: "/og.png", width: 1200, height: 630, alt: siteConfig.title }];
   return {
     title,
     description,
@@ -73,7 +75,7 @@ export function businessJsonLd() {
     name: `${profile.brand} — Software development`,
     url: siteConfig.url,
     description: siteConfig.description,
-    image: absoluteUrl("/opengraph-image"),
+    image: absoluteUrl("/og.png"),
     email: profile.email,
     founder: { "@id": PERSON_ID },
     areaServed: "Worldwide",
@@ -101,7 +103,7 @@ export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
       "@type": "ListItem",
       position: i + 1,
       name: it.name,
-      item: absoluteUrl(it.path),
+      item: absoluteUrl(it.path.endsWith("/") ? it.path : `${it.path}/`),
     })),
   };
 }

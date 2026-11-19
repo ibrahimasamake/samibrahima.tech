@@ -31,7 +31,7 @@ export default function AboutPage() {
       <PageHeader
         crumbs={[{ name: "About", path: "/about" }]}
         eyebrow="About"
-        title="I build software that businesses run on, and I keep it running."
+        title="The story behind the work."
       />
 
       <Section className="pt-14 sm:pt-20">
@@ -70,41 +70,40 @@ export default function AboutPage() {
 
           <div className="prose-body text-lg">
             <p className="text-xl text-fg/90">
-              Most small businesses I know in Bamako and Bengaluru run on WhatsApp, a notebook and memory. They are good
+              Most small shops in Bamako and Bengaluru still run on WhatsApp, a notebook and memory. They are good
               businesses. They are just invisible online, and they rarely know exactly what is left in stock. That is the
-              problem I like working on.
+              problem this work keeps coming back to.
             </p>
             <p>
-              I started <strong className="font-medium text-fg">SAM Informatique Mali</strong> in {profile.since} to build
-              software for local businesses: from understanding what the business needs to delivery and long-term support.
-              I still run it, and mentor two junior developers there.
+              It started in {profile.since} with <strong className="font-medium text-fg">SAM Informatique Mali</strong>:
+              software and IT support for local businesses, from the first conversation to long-term support, and today
+              two junior developers learning the craft along the way.
             </p>
             <p>
-              In 2024 I founded <Link href="/projects/sougba">Sougba</Link>, a marketplace and shop-management platform for
-              Mali. Merchants put their shop online, customers reach them directly, and the owner sees sales and stock from a
-              phone through <Link href="/projects/fere">Fere</Link>. I designed it, built it, and run its production on
-              Kubernetes myself, with automated deploys, backups and written post-mortems.
+              In 2024 came <Link href="/projects/sougba/">Sougba</Link>, a marketplace for Mali. Shops go online by
+              neighbourhood, customers reach them directly, and owners see sales and stock from their phone with{" "}
+              <Link href="/projects/fere/">Fere</Link>. Designed, built and run in production with automated deploys,
+              backups and honest post-mortems.
             </p>
             <p>
-              More recently I built the online store of{" "}
-              <Link href="/projects/nafas-perfumes">Nafas Perfumes</Link>, a perfume shop in Bengaluru, and with three
-              classmates built <Link href="/projects/rastescan">RasteScan</Link>, a public record of road repairs that won
-              Best Socially Relevant Project at the TechKubik National Level Project Expo 2026.
+              Then the online store of <Link href="/projects/nafas-perfumes/">Nafas Perfumes</Link> in Bengaluru, and{" "}
+              <Link href="/projects/rastescan/">RasteScan</Link>, a public record of road repairs built by four classmates,
+              which won Best Socially Relevant Project at the TechKubik National Level Project Expo 2026.
             </p>
-            <h2 className="!mt-12 text-2xl font-semibold text-fg">How I work</h2>
+            <h2 className="!mt-12 text-2xl font-semibold text-fg">The way we like to work</h2>
             <p>
-              What I bring is the whole picture: understanding the business, designing the product, writing the code,
-              shipping it and keeping it alive when real customers use it. I prefer simple systems that are easy to run over
-              clever ones that need a team to babysit.
+              The whole picture, not just the code: understand the business, design the product, build it, ship it, and keep
+              it alive when real customers use it. Simple systems that are easy to run beat clever ones that need a team to
+              babysit them.
             </p>
             <p>
-              I keep learning on purpose. I am completing a Master of Computer Applications at CMR University and a
-              postgraduate programme in multi-cloud architecture and DevOps with Hero Vired, and I build with AI models where
-              they genuinely help, inside rules they cannot break.
+              And never stop learning: a Master of Computer Applications at CMR University, a postgraduate programme in
+              multi-cloud architecture and DevOps with Hero Vired, and plenty of experiments with AI, always inside rules it
+              cannot break. The <Link href="/blog/">blog</Link> is where those lessons get written down.
             </p>
             <div className="!mt-10">
-              <ButtonLink href="/start-a-project" size="lg">
-                Work with me <ArrowRight aria-hidden />
+              <ButtonLink href="/start-a-project/" size="lg">
+                Let&apos;s build something <ArrowRight aria-hidden />
               </ButtonLink>
             </div>
           </div>
@@ -116,7 +115,7 @@ export default function AboutPage() {
           <SectionHeading
             eyebrow="Experience & learning"
             title={<span id="journey-title">The journey so far</span>}
-            lead="Work, products, education and recognition. Dates as on my CV."
+            lead="Work, products, studies and a prize along the way."
           />
           <ol className="relative grid gap-4 border-l border-border pl-6 sm:pl-8">
             {timeline.map((t, i) => (
@@ -160,37 +159,11 @@ export default function AboutPage() {
         <div className="container-page">
           <SectionHeading
             eyebrow="Technical expertise"
-            title={<span id="expertise-title">What I work with</span>}
+            title={<span id="expertise-title">The toolbox</span>}
             lead="Production experience is separated from project and training work, so you know exactly what to expect."
           />
           <div className="mt-12">
             <TechExpertise />
-          </div>
-        </div>
-      </Section>
-
-      <Section className="border-t border-border bg-surface/30 py-16 sm:py-20" aria-labelledby="shop-title">
-        <div className="container-page grid items-center gap-10 md:grid-cols-[1fr_1.2fr]">
-          <div className="overflow-hidden rounded-3xl border border-border">
-            <Image
-              src="/images/about/sam-informatique-shop.webp"
-              alt="Ibrahima Samake behind the counter of the SAM Informatique Mali shop, with two laptops and shelves of phone accessories"
-              width={765}
-              height={1020}
-              sizes="(min-width: 768px) 40vw, 100vw"
-              className="aspect-[4/3] w-full object-cover object-[50%_35%]"
-            />
-          </div>
-          <div>
-            <p className="eyebrow">Where it started</p>
-            <h2 id="shop-title" className="mt-4 text-3xl font-semibold text-fg">
-              A shop counter in Bamako
-            </h2>
-            <p className="mt-4 text-lg leading-relaxed text-muted">
-              SAM Informatique Mali started as software and IT support for local businesses. Working next to shop owners
-              every day is why every product I build starts with how the business really works, and why it has to run on the
-              phone they already own.
-            </p>
           </div>
         </div>
       </Section>

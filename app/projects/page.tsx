@@ -21,8 +21,8 @@ export default function ProjectsPage() {
       <PageHeader
         crumbs={[{ name: "Work", path: "/projects" }]}
         eyebrow="Work"
-        title="Products built, shipped and running."
-        lead="Marketplaces, business software, online shops, civic tech and cloud platforms. Each case study shows the business problem, the solution, the architecture and my part in it."
+        title="Things we shipped (and still keep alive)."
+        lead="Marketplaces, business software, online shops, civic tech and cloud platforms. Each case study shows the business problem, the solution, the architecture and what changed."
       />
       <Section className="pt-14 sm:pt-16">
         <div className="container-page grid gap-6">

@@ -4,19 +4,19 @@ import { ArrowLeft, ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useId, useRef, useState, useTransition } from "react";
-import { submitEnquiry } from "@/app/actions";
 import { Button } from "@/components/ui/button";
 import { describedBy, Field, Input, Textarea } from "@/components/ui/field";
 import { budgetRanges, labelFor, projectTypes, timelines } from "@/data/enquiry";
+import { submitForm } from "@/lib/submit-form";
 import { cn } from "@/lib/utils";
 import { enquiryStepSchemas, flattenErrors, type EnquiryInput, type FormState } from "@/lib/validation";
 
 const steps = [
   { key: "type", title: "What do you need?", label: "Project type" },
-  { key: "description", title: "Tell me about the project", label: "Description" },
+  { key: "description", title: "Tell us about the project", label: "Description" },
   { key: "budget", title: "What budget do you have in mind?", label: "Budget" },
   { key: "timeline", title: "When do you need it?", label: "Timeline" },
-  { key: "contact", title: "How can I reach you?", label: "Contact" },
+  { key: "contact", title: "Where should we reply?", label: "Contact" },
 ] as const;
 
 type StepKey = (typeof steps)[number]["key"];
@@ -96,26 +96,42 @@ export function ProjectEnquiryForm() {
     if (current.key !== "contact") return next();
     if (!validateStep("contact")) return;
     startTransition(async () => {
-      try {
-        const res = await submitEnquiry({ ...(data as EnquiryInput), consent: data.consent as true, startedAt: startedAt.current });
-        setResult(res);
-        if (res.fieldErrors) {
-          setErrors(res.fieldErrors);
-          const firstBad = steps.findIndex((s) => Object.keys(enquiryStepSchemas[s.key].shape).some((k) => res.fieldErrors?.[k]));
-          if (firstBad >= 0) setStep(firstBad);
-        }
-      } catch {
-        setResult({ status: "error", message: "Something went wrong while sending. Please check your connection and try again." });
-      }
+      const type = labelFor(projectTypes, data.projectType);
+      const res = await submitForm({
+        subject: `Project enquiry: ${type} (${data.fullName})`,
+        name: data.fullName,
+        email: data.email,
+        honeypot: data.website,
+        startedAt: startedAt.current,
+        rows: [
+          ["Project type", type],
+          ["Budget", labelFor(budgetRanges, data.budget)],
+          ["Timeline", labelFor(timelines, data.timeline)],
+          ["Name", data.fullName],
+          ["Business", data.businessName ?? ""],
+          ["Email", data.email],
+          ["WhatsApp", data.whatsapp ?? ""],
+          ["Country", data.country],
+          ["Project description", data.description],
+        ],
+      });
+      setResult(
+        res.status === "success" && !res.message
+          ? {
+              status: "success",
+              message: `Thank you, ${data.fullName.trim().split(" ")[0]}! Your project is in good hands. Expect a real reply at ${data.email}, usually within two working days.`,
+            }
+          : res,
+      );
     });
   }
 
-  if (result.status === "success") {
+  if (result.status === "success" || result.status === "mailto") {
     return (
       <div className="rounded-3xl border border-border bg-surface p-8 sm:p-12" role="status">
         <CheckCircle2 className="size-10 text-success" aria-hidden />
         <h2 ref={headingRef} tabIndex={-1} className="mt-6 text-2xl font-semibold text-fg outline-none sm:text-3xl">
-          Enquiry received
+          {result.status === "success" ? "Enquiry received" : "Almost there"}
         </h2>
         <p className="mt-3 max-w-xl text-lg leading-relaxed text-muted">{result.message}</p>
         <dl className="mt-8 grid gap-4 rounded-2xl border border-border bg-bg p-6 text-sm sm:grid-cols-3">
@@ -234,7 +250,7 @@ export function ProjectEnquiryForm() {
                 columns="sm:grid-cols-2 lg:grid-cols-3"
               />
               <p className="mt-5 text-sm text-subtle">
-                A range helps me suggest the right scope. It is not a commitment, and &quot;Not sure yet&quot; is fine.
+                A range helps us suggest the right scope. It is not a commitment, and &quot;Not sure yet&quot; is fine.
               </p>
             </>
           )}

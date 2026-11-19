@@ -8,14 +8,14 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   title: "Start a project",
   description:
-    "Tell me about your website, mobile app or custom software project. Five short steps; you get a reply on scope, timeline and cost.",
+    "Tell us about your website, mobile app or custom software project. Five short steps; you get a reply on scope, timeline and cost.",
   path: "/start-a-project",
 });
 
 const notes = [
-  { icon: Clock, title: "About 3 minutes", text: "Five short steps. Only the essentials." },
-  { icon: MessageSquare, title: "A real reply", text: "I read every enquiry myself and answer with questions or a proposal." },
-  { icon: Lock, title: "Private", text: "Your answers are sent to me by email and not stored on this site." },
+  { icon: Clock, title: "About 3 minutes", text: "Five short steps. Less time than a coffee." },
+  { icon: MessageSquare, title: "A real reply", text: "Every enquiry is read by a human and answered with questions or a proposal. No bots, no autoresponder." },
+  { icon: Lock, title: "Private", text: "Your answers go straight to our inbox. This website stores nothing." },
 ];
 
 export default function StartProjectPage() {
@@ -24,8 +24,8 @@ export default function StartProjectPage() {
       <PageHeader
         crumbs={[{ name: "Start a project", path: "/start-a-project" }]}
         eyebrow="Start a project"
-        title="Tell me what you want to build."
-        lead="Share a few details and I will come back with how I would approach it, a realistic timeline and a cost range. No obligation."
+        title="So, what are we building?"
+        lead="Share a few details and get back an honest plan: how we would approach it, a realistic timeline and a cost range. No obligation, no sales pitch."
       />
       <div className="container-page grid gap-10 py-14 sm:py-20 lg:grid-cols-[1fr_20rem] lg:gap-14">
         <Suspense fallback={<div className="h-[560px] animate-pulse rounded-3xl border border-border bg-surface" aria-label="Loading form" />}>
@@ -48,7 +48,7 @@ export default function StartProjectPage() {
             <a href={`mailto:${profile.email}`} className="break-all text-fg underline underline-offset-4">
               {profile.email}
             </a>
-            . I reply in English or French.
+            . English or French, both welcome.
           </div>
         </aside>
       </div>

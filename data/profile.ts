@@ -55,7 +55,7 @@ export const siteConfig = {
   title: "Ibrahima Samake — Web, mobile & custom software development",
   description:
     "Founder-led software development: websites, web and mobile apps, custom business software, e-commerce, cloud & DevOps and AI. From idea to production.",
-  ogImage: "/opengraph-image",
+  ogImage: "/og.png",
   locale: "en_US",
 } as const;
 
@@ -63,6 +63,7 @@ export const mainNav = [
   { label: "Services", href: "/services" },
   { label: "Work", href: "/projects" },
   { label: "Process", href: "/process" },
+  { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ] as const;

@@ -17,15 +17,15 @@ export default function ContactPage() {
       <PageHeader
         crumbs={[{ name: "Contact", path: "/contact" }]}
         eyebrow="Contact"
-        title="Let's talk."
-        lead="A question, a partnership, or a project that does not fit a form. I reply to every message, in English or French."
+        title="Say hello. We don't bite."
+        lead="A question, a crazy idea, a partnership, or a project that does not fit in a form. Every message gets a real reply, in English or French."
       />
       <div className="container-page grid gap-12 py-14 sm:py-20 lg:grid-cols-[22rem_1fr] lg:gap-16">
         <div className="grid content-start gap-8">
           <div className="rounded-3xl border border-accent/30 bg-accent-soft p-6">
             <p className="font-semibold text-fg">Planning a project?</p>
             <p className="mt-2 text-sm leading-relaxed text-muted">
-              The project form asks the right questions so I can reply with a scope and a cost range.
+              The project form asks the right questions, so the reply can come with a scope and a cost range.
             </p>
             <ButtonLink href="/start-a-project" className="mt-5 w-full">
               Start your project <ArrowRight aria-hidden />

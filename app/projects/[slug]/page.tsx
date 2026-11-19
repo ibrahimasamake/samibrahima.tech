@@ -16,6 +16,8 @@ import { getService } from "@/data/services";
 import { graph, pageMetadata } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/utils";
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
 }
@@ -160,7 +162,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
           </Block>
 
           <div className="grid gap-10 md:grid-cols-2">
-            <Block title="My contribution" small>
+            <Block title="Role on the project" small>
               <ul className="grid gap-3">
                 {p.contribution.map((c) => (
                   <li key={c} className="flex gap-3 leading-relaxed text-muted">
@@ -190,7 +192,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
           <div className="rounded-3xl border border-border bg-surface p-6">
             <p className="font-semibold text-fg">{p.similar}</p>
             <p className="mt-2 text-sm leading-relaxed text-muted">
-              Tell me about your business. I will reply with how I would approach it.
+              Tell us about your business and get back a clear idea of how we would approach it.
             </p>
             <ButtonLink href="/start-a-project" className="mt-5 w-full">
               Discuss a similar project <ArrowRight aria-hidden />

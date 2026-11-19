@@ -73,7 +73,7 @@ export const contactSchema = z
 export type ContactInput = z.input<typeof contactSchema>;
 
 export type FormState = {
-  status: "idle" | "success" | "error";
+  status: "idle" | "success" | "error" | "mailto";
   message?: string;
   fieldErrors?: Record<string, string>;
 };

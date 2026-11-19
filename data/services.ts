@@ -98,7 +98,7 @@ export const services: Service[] = [
     ],
     faqs: [
       { q: "Flutter or native?", a: "Flutter for almost every business app: one codebase, close-to-native performance, lower cost. Native only when a feature truly needs it." },
-      { q: "Do you publish to the stores?", a: "I prepare and submit the builds under your developer accounts, so the apps stay yours." },
+      { q: "Do you publish to the stores?", a: "Yes. Builds are prepared and submitted under your own developer accounts, so the apps stay yours." },
     ],
   },
   {
@@ -110,7 +110,7 @@ export const services: Service[] = [
       "Custom business software: inventory management, point of sale, CRM, order management and ERP-style platforms, with robust backend and API development.",
     headline: "Software shaped around how your business really works.",
     summary:
-      "Off-the-shelf tools are built for someone else's business. I build the system you need: stock, sales, orders, customers and reports, with the backend and APIs to grow.",
+      "Off-the-shelf tools are built for someone else's business. We build the system you need: stock, sales, orders, customers and reports, with the backend and APIs to grow.",
     offerings: [
       { title: "Inventory management", text: "Products, stock levels, movements and low-stock alerts across branches." },
       { title: "Point of sale", text: "Fast checkout, receipts and sales history that match your stock automatically." },
@@ -134,7 +134,7 @@ export const services: Service[] = [
       "You need an API so a website, an app and partners can share the same data",
     ],
     faqs: [
-      { q: "Can it work across several shops or branches?", a: "Yes. Fere, the merchant workspace I built for Sougba, handles branches, team roles, stock and sales per branch." },
+      { q: "Can it work across several shops or branches?", a: "Yes. Fere, the merchant workspace built for Sougba, handles branches, team roles, stock and sales per branch." },
       { q: "Who owns the code?", a: "You do. The repository, the data and the deployment are yours from day one." },
     ],
   },
@@ -183,7 +183,7 @@ export const services: Service[] = [
       "Cloud deployment, AWS infrastructure, Docker and Kubernetes, CI/CD pipelines, GitOps, Linux administration, backups and monitoring.",
     headline: "Infrastructure that makes releasing boring, and keeps your data safe.",
     summary:
-      "I run my own platform in production, alone. The same practices are available for your product: automated deploys, rollbacks in one step, backups you have actually restored, and monitoring that warns you first.",
+      "We run our own platform in production every day. The same practices are available for your product: automated deploys, rollbacks in one step, backups you have actually restored, and monitoring that warns you first.",
     offerings: [
       { title: "AWS infrastructure", text: "VPCs, load balancers, auto scaling, HTTPS certificates, defined in Terraform." },
       { title: "Cloud deployment", text: "Move an app from a laptop or a shared host to a reliable, reproducible setup." },
@@ -208,8 +208,8 @@ export const services: Service[] = [
       "Your app runs on a single server and you want it to survive a failure",
     ],
     faqs: [
-      { q: "Do I need Kubernetes?", a: "Often not. A small product may be best on one well-managed server or a managed platform. I recommend the simplest setup that meets your needs." },
-      { q: "Can you take over an existing deployment?", a: "Yes. I start with an audit: what runs where, how it is deployed and backed up, and what to fix first." },
+      { q: "Do I need Kubernetes?", a: "Often not. A small product may be best on one well-managed server or a managed platform. We recommend the simplest setup that meets your needs." },
+      { q: "Can you take over an existing deployment?", a: "Yes. It starts with an audit: what runs where, how it is deployed and backed up, and what to fix first." },
     ],
   },
   {
@@ -221,7 +221,7 @@ export const services: Service[] = [
       "AI integrations, LLM-powered applications, assistants, intelligent data processing and workflow automation built with clear rules and safeguards.",
     headline: "AI features that help your team, with rules it cannot break.",
     summary:
-      "Language and vision models are useful when they sit inside plain, testable software. The model suggests; your rules decide. That is how RasteScan was built, and how I build AI features for businesses.",
+      "Language and vision models are useful when they sit inside plain, testable software. The model suggests; your rules decide. That is how RasteScan was built, and how we build AI features for businesses.",
     offerings: [
       { title: "AI integrations", text: "Add model-powered features to an existing web or mobile app." },
       { title: "LLM-powered applications", text: "Search, summarise, classify and extract from your documents and data." },

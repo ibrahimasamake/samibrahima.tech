@@ -31,14 +31,15 @@ export default function PrivacyPage() {
               you about your request.
             </p>
             <p>
-              The forms are processed on the server and delivered to me by email through an email delivery provider
-              (Resend). The website itself does not keep a database of submissions.
+              This website has no database. When you press send, your message is passed to Web3Forms, a form-to-email
+              service, which delivers it to our inbox. If that service is not available, your own email app opens with the
+              message ready, and nothing is sent until you press send there.
             </p>
           </section>
           <section>
             <h2 className="mb-3 text-xl font-semibold text-fg">How long it is kept</h2>
             <p>
-              Enquiry emails are kept in my mailbox for as long as needed to discuss and, if we work together, deliver your
+              Enquiry emails are kept in our mailbox for as long as needed to discuss and, if we work together, deliver your
               project, and deleted on request. Your details are never sold, rented or added to a mailing list.
             </p>
           </section>
@@ -46,8 +47,8 @@ export default function PrivacyPage() {
             <h2 className="mb-3 text-xl font-semibold text-fg">Cookies and analytics</h2>
             <p>
               This website does not use advertising or tracking cookies. A small item in your browser&apos;s local storage
-              remembers your light or dark theme choice. The hosting provider keeps standard technical logs (such as IP
-              address and request time) for security and to block abuse of the forms.
+              remembers your light or dark theme choice. The hosting provider (GitHub Pages) and the form service may keep standard technical logs, such as IP
+              address and request time, for security and to block abuse.
             </p>
           </section>
           <section>

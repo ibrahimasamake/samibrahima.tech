@@ -3,13 +3,9 @@ import { mainNav, profile, socialLinks } from "@/data/profile";
 import { services } from "@/data/services";
 import { Logo } from "./logo";
 
-async function getYear() {
-  "use cache";
-  return new Date().getFullYear();
-}
-
-export async function SiteFooter() {
-  const year = await getYear();
+export function SiteFooter() {
+  // Static export: the year is set when the site is built.
+  const year = new Date().getFullYear();
   return (
     <footer className="border-t border-border bg-surface">
       <div className="container-page grid gap-12 py-16 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
@@ -45,6 +41,7 @@ export async function SiteFooter() {
               Privacy policy
             </Link>
             <span>No tracking cookies</span>
+            <span>Made in Bamako &amp; Bengaluru</span>
           </p>
         </div>
       </div>

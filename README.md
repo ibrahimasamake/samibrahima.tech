@@ -8,7 +8,7 @@ TypeScript, Tailwind CSS 4, Motion and Lucide.
 
 ```bash
 npm install
-cp .env.example .env.local   # optional: without email keys, form submissions are printed to the terminal
+cp .env.example .env.local   # optional
 npm run dev                  # http://localhost:3000
 ```
 
@@ -17,7 +17,7 @@ Checks before deploying:
 ```bash
 npx tsc --noEmit
 npm run lint
-npm run build && npm start
+npm run build && npx serve out   # preview the static site
 ```
 
 ## Where things live
@@ -32,11 +32,11 @@ npm run build && npm start
 | Process steps and "why work with us" | `data/process.ts` |
 | Enquiry form options (types, budget ranges, timelines) | `data/enquiry.ts` |
 | Form validation | `lib/validation.ts` |
-| Email sending (Resend HTTP API) | `lib/email.ts` |
-| Spam protection (honeypot, timing, rate limit) | `lib/spam.ts` |
-| Server actions for both forms | `app/actions.ts` |
+| Form delivery (Web3Forms, or email app fallback) | `lib/submit-form.ts` |
+| Blog loader (Markdown) and posts | `lib/blog.ts`, `content/blog/` |
+| "What we're working on" board | `data/now.ts` |
 | SEO helpers and JSON-LD | `lib/seo.ts` |
-| Old URLs (French pages, 404 for unknown slugs) | `proxy.ts`, `next.config.ts` |
+| Old URLs (redirect pages) | `public/sougba.html`, `public/blog/*.html`, `public/work/` … |
 | Design tokens (colours, dark/light) | `app/globals.css` |
 
 To add a case study, add an object to `projects` in `data/projects.ts` and put its
@@ -45,38 +45,48 @@ structured data are generated from it.
 
 Pages from the previous static site are kept in `public/` so old links keep working:
 `/rastescan.html`, `/blog/gitops-solo-developer.html`, `/fr/…`, `/cv/…`.
-`/sougba.html` redirects to `/projects/sougba`.
+`/sougba.html` and the old blog URL redirect to their new pages.
+
+## Blog
+
+Posts are Markdown files in `content/blog/`. The file name is the URL
+(`content/blog/my-post.md` becomes `/blog/my-post/`). Front matter:
+
+```yaml
+---
+title: "Post title"
+description: "One or two sentences for cards and search results."
+date: 2026-11-19
+category: Architecture   # Architecture | Tools | Cloud & DevOps | AI | Product | News
+tags: [kubernetes, gitops]
+cover: /images/blog/my-cover.jpg   # optional
+draft: true                        # optional, hides the post
+---
+```
+
+Commit and push to `main`: the post, its category page, the RSS feed (`/blog/rss.xml`)
+and the sitemap update automatically.
 
 ## Environment variables
 
 | Name | Required | Purpose |
 | --- | --- | --- |
-| `NEXT_PUBLIC_SITE_URL` | recommended | Canonical origin, default `https://www.samibrahima.tech` |
-| `RESEND_API_KEY` | yes, in production | Sends form submissions. Server-only. |
-| `CONTACT_TO_EMAIL` | yes, in production | Inbox that receives enquiries |
-| `CONTACT_FROM_EMAIL` | yes, in production | Sender on a domain verified in Resend |
+| `NEXT_PUBLIC_SITE_URL` | no | Canonical origin, default `https://www.samibrahima.tech` |
+| `NEXT_PUBLIC_WEB3FORMS_KEY` | recommended | Sends form submissions by email through Web3Forms |
 
-Without the three email variables in production, the forms show a clear error with
-the email address to write to instead. Nothing is stored on the server.
+Without the Web3Forms key, submitting a form opens the visitor's email app with the
+message ready to send. The site stores nothing.
 
-## Deploy (Vercel)
+To enable direct form delivery:
+1. Go to <https://web3forms.com>, enter the inbox that should receive enquiries, and
+   copy the access key from the email you receive.
+2. In GitHub: repository Settings → Secrets and variables → Actions → Variables →
+   New repository variable `WEB3FORMS_KEY` with that key.
+3. Re-run the "Deploy to GitHub Pages" workflow (Actions tab), or push any commit.
 
-The site needs a Node.js host for the form server actions, so GitHub Pages (static
-only) can no longer serve it.
+## Deploy
 
-1. Push this repository to GitHub and import it at <https://vercel.com/new>
-   (framework preset: Next.js, no build settings to change).
-2. In Project → Settings → Environment Variables, add the four variables above for
-   Production (and Preview if you want forms to work on preview URLs).
-3. In Resend, add the domain `samibrahima.tech`, create the DNS records it shows
-   (SPF/DKIM) in Cloudflare, and wait until it reads "Verified".
-4. In Vercel → Settings → Domains, add `www.samibrahima.tech` (primary) and
-   `samibrahima.tech`, and set the apex to redirect (308) to `www`.
-5. In Cloudflare DNS, replace the GitHub Pages records with the values Vercel shows
-   (typically `www` → CNAME `cname.vercel-dns.com`, `@` → A `76.76.21.21`),
-   set to "DNS only" (grey cloud).
-6. In the GitHub repository settings, turn off GitHub Pages so the two hosts don't
-   compete for the domain.
-7. Verify: `https://samibrahima.tech` redirects to `https://www.samibrahima.tech`,
-   HTTPS is valid, `/sitemap.xml` and `/robots.txt` load, and a test enquiry arrives.
-8. In Google Search Console, add the `www` property and submit `/sitemap.xml`.
+The site is a static export (`out/`), built and published to GitHub Pages by
+`.github/workflows/deploy.yml` on every push to `main`. Pages is set to
+"GitHub Actions" as its source, with custom domain `www.samibrahima.tech`
+(`samibrahima.tech` redirects to it).

@@ -3,8 +3,8 @@ import { ButtonLink } from "@/components/ui/button";
 import { profile } from "@/data/profile";
 
 export function CtaBand({
-  title = "Have a project in mind?",
-  text = "Tell me about your business and what you want to build. You will get a clear answer on scope, timeline and cost, usually within two working days.",
+  title = "Got an idea that keeps you up at night?",
+  text = "Tell us about it. You get a clear, friendly answer on scope, timeline and cost, usually within two working days. Worst case, you get free advice.",
 }: {
   title?: string;
   text?: string;

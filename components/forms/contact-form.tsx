@@ -3,9 +3,9 @@
 import { CheckCircle2, Loader2, Send } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useId, useRef, useState, useTransition } from "react";
-import { submitContact } from "@/app/actions";
 import { Button } from "@/components/ui/button";
 import { describedBy, Field, Input, Textarea } from "@/components/ui/field";
+import { submitForm } from "@/lib/submit-form";
 import { contactSchema, flattenErrors, type FormState } from "@/lib/validation";
 
 export function ContactForm() {
@@ -21,7 +21,7 @@ export function ContactForm() {
     startedAt.current = Date.now();
   }, []);
   useEffect(() => {
-    if (result.status === "success") doneRef.current?.focus();
+    if (result.status !== "idle" && result.status !== "error") doneRef.current?.focus();
   }, [result.status]);
 
   const set = (key: keyof typeof data, value: string | boolean) => {
@@ -37,22 +37,29 @@ export function ContactForm() {
       return;
     }
     startTransition(async () => {
-      try {
-        const res = await submitContact({ ...data, consent: data.consent as true, startedAt: startedAt.current });
-        setResult(res);
-        if (res.fieldErrors) setErrors(res.fieldErrors);
-      } catch {
-        setResult({ status: "error", message: "Something went wrong while sending. Please try again." });
-      }
+      const res = await submitForm({
+        subject: `Website message: ${data.subject}`,
+        name: data.fullName,
+        email: data.email,
+        honeypot: data.website,
+        startedAt: startedAt.current,
+        rows: [
+          ["Name", data.fullName],
+          ["Email", data.email],
+          ["Subject", data.subject],
+          ["Message", data.message],
+        ],
+      });
+      setResult(res.status === "success" && !res.message ? { status: "success", message: "Thanks for writing! A reply is on its way to your inbox soon." } : res);
     });
   }
 
-  if (result.status === "success") {
+  if (result.status === "success" || result.status === "mailto") {
     return (
       <div className="rounded-3xl border border-border bg-surface p-8" role="status">
         <CheckCircle2 className="size-9 text-success" aria-hidden />
         <h2 ref={doneRef} tabIndex={-1} className="mt-5 text-2xl font-semibold text-fg outline-none">
-          Message sent
+          {result.status === "success" ? "Message sent" : "Almost there"}
         </h2>
         <p className="mt-2 leading-relaxed text-muted">{result.message}</p>
       </div>
@@ -110,7 +117,7 @@ export function ContactForm() {
             className="mt-1 size-4 shrink-0 accent-[var(--accent)]"
           />
           <span>
-            My details are used only to reply to me and are not stored on this website (
+            My details are only used to reply to me and are not stored on this website (
             <Link href="/privacy" className="text-fg underline underline-offset-4">
               privacy policy
             </Link>

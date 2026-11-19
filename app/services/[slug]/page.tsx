@@ -15,6 +15,8 @@ import { getProject, type Project } from "@/data/projects";
 import { getService, services } from "@/data/services";
 import { graph, pageMetadata } from "@/lib/seo";
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
 }
@@ -59,7 +61,7 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
 
       <Section aria-labelledby="offer-title">
         <div className="container-page">
-          <SectionHeading eyebrow="What I build" title={<span id="offer-title">What this covers</span>} />
+          <SectionHeading eyebrow="What we build" title={<span id="offer-title">What this covers</span>} />
           <ul className="mt-10 grid gap-px overflow-hidden rounded-3xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
             {s.offerings.map((o) => (
               <li key={o.title} className="bg-surface p-7">
@@ -111,7 +113,7 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
           <div className="container-page">
             <SectionHeading
               eyebrow="Proof"
-              title={<span id="proof-title">Where I have done this before</span>}
+              title={<span id="proof-title">Where we have done this before</span>}
               lead="Real projects, with the business problem, the solution and the architecture."
             />
             <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">

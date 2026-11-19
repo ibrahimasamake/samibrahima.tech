@@ -82,7 +82,7 @@ export function SiteHeader() {
       <div className="container-page flex h-16 items-center justify-between gap-4">
         <Logo />
 
-        <nav aria-label="Main" className="hidden md:block">
+        <nav aria-label="Main" className="hidden lg:block">
           <ul className="flex items-center gap-1">
             {mainNav.map((item) => {
               const active = isActive(pathname, item.href);
@@ -116,7 +116,7 @@ export function SiteHeader() {
           <button
             ref={toggleRef}
             type="button"
-            className="inline-flex size-10 items-center justify-center rounded-full text-fg hover:bg-surface-2 md:hidden"
+            className="inline-flex size-10 items-center justify-center rounded-full text-fg hover:bg-surface-2 lg:hidden"
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -134,7 +134,7 @@ export function SiteHeader() {
           role="dialog"
           aria-modal="true"
           aria-label="Menu"
-          className="fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto border-t border-border bg-bg md:hidden"
+          className="fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto border-t border-border bg-bg lg:hidden"
         >
           <nav aria-label="Mobile" className="container-page py-6">
             <ul className="grid gap-1">

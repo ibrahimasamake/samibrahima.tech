@@ -16,7 +16,7 @@ export const metadata = pageMetadata({
 const principles = [
   { title: "Fixed scope per milestone", text: "Each milestone has an agreed scope and price. Changes are discussed before they are built, never discovered on the invoice." },
   { title: "Weekly, working progress", text: "A preview link you can open on your phone, updated as the work moves. You review software, not slides." },
-  { title: "One point of contact", text: "The person you talk to is the person writing the code. Questions get answered quickly and precisely." },
+  { title: "One point of contact", text: "The person you talk to is the person building your product. No telephone game, no account managers." },
   { title: "You own everything", text: "Code repository, domain, hosting and app-store accounts are in your name from the start." },
 ];
 
@@ -26,7 +26,7 @@ export default function ProcessPage() {
       <PageHeader
         crumbs={[{ name: "Process", path: "/process" }]}
         eyebrow="Process"
-        title="From the first call to a product in production."
+        title="From first coffee to launch day."
         lead="Six stages, each ending with something concrete you can review. You always know what is being built, why, and what comes next."
       >
         <ButtonLink href="/start-a-project" size="lg">
@@ -40,7 +40,7 @@ export default function ProcessPage() {
       </Section>
       <Section className="border-t border-border bg-surface/30" aria-labelledby="principles-title">
         <div className="container-page">
-          <SectionHeading eyebrow="How I work" title={<span id="principles-title">What you can count on</span>} />
+          <SectionHeading eyebrow="How we work" title={<span id="principles-title">What you can count on</span>} />
           <ul className="mt-10 grid gap-6 sm:grid-cols-2">
             {principles.map((p) => (
               <li key={p.title} className="rounded-2xl border border-border bg-surface p-7">
